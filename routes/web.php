@@ -17,7 +17,6 @@ Route::get('/', function () {
     return view('main');
 });
 
-
 Route::prefix('/store')->group(function () {
     Route::get('/list', [StoreController::class, 'list'])->name('store.list');
     Route::get('/main', [StoreController::class, 'index'])->name('store');
