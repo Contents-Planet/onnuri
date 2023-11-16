@@ -24,7 +24,7 @@ var Page = {
       dataType: 'json',
       url: ajaxUrl,
       data: formData,
-      success: function(response) {
+      success: function(response) {1
         if(response.result === "ok") {
           if (typeof _callback === 'function') {
             _callback.call(null, response[formData.depth]);
