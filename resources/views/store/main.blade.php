@@ -28,7 +28,7 @@
             </dl>
           </a>
           <div class="drop-wrap">
-            <ul class="label-flex flex" data-selector="kind"></ul>
+            <ul class="label-flex flex depth2" data-selector="kind"></ul>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
             </dl>
           </a>
           <div class="drop-wrap">
-            <ul class="label-flex flex" data-selector="kind"></ul>
+            <ul class="label-flex flex icon" data-selector="kind"></ul>
           </div>
         </div>
       </section>

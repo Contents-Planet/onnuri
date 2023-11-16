@@ -71,9 +71,9 @@ var Page = {
       var html = '';
       $.each(res, function(index, row){
         html += ' <li>';
-        html += '   <div class="label-wrap type-btn '+ (depth !== "depth3" ? 'radio' : 'checkbox') +'">';
+        html += '   <div class="label-wrap '+ (depth !== "depth3" ? 'type-btn radio' : 'type-icon checkbox') +'">';
         html += '     <input type="'+ (depth !== "depth3" ? 'radio' : 'checkbox') +'" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="'+ (depth !== "depth3" ? 'radio' : 'chk') +'"/>';
-        html += '     <label class="txt" for="'+ depth +'_'+ row.seq +'">'+ row.dec +' '+ (row.cnt ? '<small>('+ row.cnt +')</small>' : '')+'</label>';
+        html += '     <label class="txt" '+ (depth === "depth3" ? 'style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.class +'.webp)"' : '') +' for="'+ depth +'_'+ row.seq +'">'+ row.dec +' '+ (row.cnt ? '<small>('+ row.cnt +')</small>' : '')+'</label>';
         html += '   </div>';
         html += ' </li>';
       })
