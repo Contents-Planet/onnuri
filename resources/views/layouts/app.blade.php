@@ -26,6 +26,7 @@
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/cssua.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-images-loaded.min.js"></script>
+  <script src="/assets/js/ND.function.js"></script>
 </head>
 
 <body>

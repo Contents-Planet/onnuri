@@ -81,216 +81,6 @@
   font-weight: 700;
   font-style: normal;
 }
-
-@font-face {
-  font-family:'yspotlight';
-  src:url('//static.econtents.co.kr/_asset/_font/yspotlight/yspotlightapp.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/yspotlight/yspotlightapp.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/yspotlight/yspotlightapp.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/yspotlight/yspotlightapp.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'GmarketSans';
-  src:url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansMedium.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansMedium.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansMedium.woff2') format('woff2'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansMedium.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'GmarketSans';
-  src:url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansLight.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansLight.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansLight.woff2') format('woff2'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansLight.otf') format('otf');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'GmarketSans';
-  src:url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansBold.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansBold.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansBold.woff2') format('woff2'),
-  url('//static.econtents.co.kr/_asset/_font/GmarketSans/GmarketSansBold.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'digico';
-  src:url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-MEDIUM.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-MEDIUM.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-MEDIUM.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-MEDIUM.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family:'digico';
-  src:url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-LIGHT.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-LIGHT.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-LIGHT.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-LIGHT.otf') format('otf');
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family:'digico';
-  src:url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-BOLD.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-BOLD.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-BOLD.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/digico/DIGICO-BOLD.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'NanumSquareNeo';
-  src:url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Rg.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Rg.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Rg.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Rg.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family:'NanumSquareNeo';
-  src:url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Lt.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Lt.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Lt.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Lt.otf') format('otf');
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family:'NanumSquareNeo';
-  src:url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Bd.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Bd.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Bd.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/NanumSquareNeo/NanumSquareNeo-Bd.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'NanumGothic';
-  src:url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family:'NanumGothic';
-  src:url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic-Bold.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic-Bold.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic-Bold.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/NanumGothic/NanumGothic-Bold.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'HyundaiSansHead';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRRegular.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRRegular.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRRegular.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRRegular.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansHead';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRLight.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRLight.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRLight.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRLight.otf') format('otf');
-  font-weight: 100;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansHead';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRMedium.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRMedium.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRMedium.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRMedium.otf') format('otf');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansHead';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansHead';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansHeadKRBold.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family:'HyundaiSansText';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRRegular.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRRegular.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRRegular.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRRegular.otf') format('otf');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansText';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRMedium.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRMedium.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRMedium.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRMedium.otf') format('otf');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family:'HyundaiSansText';
-  src:url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRBold.eot');
-  src:local(※),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRBold.eot?#iefix') format('embedded-opentype'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRBold.woff') format('woff'),
-  url('//static.econtents.co.kr/_asset/_font/HyundaiSans/HyundaiSansTextKRBold.otf') format('otf');
-  font-weight: 700;
-  font-style: normal;
-}
-
 @font-face {
   font-family:'HGGGothicssi';
   src:url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_40g.eot');
@@ -328,6 +118,57 @@
   url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_80g.eot?#iefix') format('embedded-opentype'),
   url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_80g.woff') format('woff'),
   url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_80g.otf') format('otf');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family:'HGGGothicssi';
+  src:url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_99g.eot');
+  src:local(※),
+  url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_99g.eot?#iefix') format('embedded-opentype'),
+  url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_99g.woff') format('woff'),
+  url('//static.econtents.co.kr/_asset/_font/HGGGothicssi/HGGGothicssi_Pro_99g.otf') format('otf');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:'Pretendard';
+  src:url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Regular.eot');
+  src:local(※),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Regular.eot?#iefix') format('embedded-opentype'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Regular.woff') format('woff'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Regular.otf') format('otf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Pretendard';
+  src:url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Light.eot');
+  src:local(※),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Light.eot?#iefix') format('embedded-opentype'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Light.woff') format('woff'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Light.otf') format('otf');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Pretendard';
+  src:url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Medium.eot');
+  src:local(※),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Medium.eot?#iefix') format('embedded-opentype'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Medium.woff') format('woff'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Medium.otf') format('otf');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family:'Pretendard';
+  src:url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Bold.eot');
+  src:local(※),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Bold.eot?#iefix') format('embedded-opentype'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Bold.woff') format('woff'),
+  url('//static.econtents.co.kr/_asset/_font/Pretendard/Pretendard-Bold.otf') format('otf');
   font-weight: 700;
   font-style: normal;
 }

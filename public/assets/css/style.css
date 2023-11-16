@@ -36,3 +36,48 @@ figure img {display:block; margin:0 auto;}
   #footer .tit {font-size:20px;}
   #footer .row-ul { padding-left:15px;}
 }
+
+.h1 {font-size:130px;}
+.t-orange {color:#FE5521}
+
+.drop-container .drop-wrap {display:none;}
+.drop-container._open > .drop-wrap {display:block;}
+
+.label-flex {margin:0 -10px;margin-top:60px;}
+.label-flex > li {width:33.33%; padding:0 10px; margin-bottom:45px;}
+.label-wrap {display:block; position:relative; width:100%; font-size:44px;}
+.label-wrap [type=radio],
+.label-wrap [type=checkbox] {opacity:0; position:absolute; left:0; top:0;}
+
+.label-wrap.type-btn .txt {display:block; width:100%; padding:23px 10px; text-align:center; border-radius: 80px;border: 1px solid #E9E9E9;background: #FCFCFC; color:#4B4B4B;}
+.label-wrap.type-btn .txt small {font-size:32px; font-weight:100;}
+.label-wrap.type-btn :checked + .txt {background:#FE5521; color:#fff; font-weight:700;}
+
+
+.page-store {font-family:'Pretendard';position:relative;padding-top:580px; color:#222;background:url(https://static.econtents.co.kr/_img/onnuri/bg_splash.webp) center top 200px no-repeat; background-size:100% auto;}
+.page-store:before {content:""; display:block; width:100%; height:250px; background:url(https://static.econtents.co.kr/_img/onnuri/bg_top.webp) center top repeat-x; position:absolute; left:50%; top:0; transform: translate(-50%, 0)}
+.page-store #header {text-align:center; z-index:10;font-family:'HGGGothicssi';padding-top:130px; position:relative}
+.page-store #header .sticky{width:100%; position:absolute; left:0; top:0; padding:15px 0;}
+.page-store #logo {width:100%; max-width:231px; margin:0 auto; }
+.page-store #logo .logo-item {display:block; width:100%; padding-top:44.15%;background:url(https://static.econtents.co.kr/_img/onnuri/logo.webp) center no-repeat; background-size:cover;}
+.page-store #header .h1 {font-weight:700; margin-top:40px; display:inline-block; position:relative;}
+.page-store #header .h1:before {content:""; display:block; width:20px; height:20px; border-radius :100%; border:5px solid #FE5521; position:absolute; left:-10px; top:-20px;}
+.page-store #header .h1 strong {font-weight:900;}
+
+.page-store #contents {padding-bottom:100px;}
+.page-store .drop-sec {margin:0 auto; width:100%; max-width:990px; padding:0 15px; padding-top:120px;}
+.page-store .drop-container {margin-bottom:60px;}
+.page-store .drop-container .btn-drop {display:block; padding:50px 60px; border-radius:80px; background:#fff; box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);font-size:50px; text-align:center; position:relative; overflow:hidden; }
+.page-store .drop-container .btn-drop:before {content:""; display:block; width:33px; height:20px;background:url(https://static.econtents.co.kr/_img/onnuri/drop_arrow.webp) center no-repeat; background-size:cover; position:absolute; right:130px;top:50%; transform: translate(0, -50%); transition-duration: 0.3s; }
+.page-store .drop-container._open .btn-drop:before {transform: translate(0, -50%) rotate(180deg);}
+.page-store .drop-container .btn-drop .dt {display:none;}
+.page-store .drop-container .btn-drop small {color:#666; font-size:44px;}
+.page-store .drop-container._disable .btn-drop {box-shadow:none; background:#ccc; cursor:not-allowed}
+.page-store .drop-container._disable .btn-drop:hover,
+.page-store .drop-container._disable .btn-drop:focus {outline:0;}
+.page-store .drop-container._disable .btn-drop:after {content:""; display:block; width:100%; height:100%;background:rgba(255, 255, 255, 0.8); position:absolute; left:0; top:0; }
+.page-store .drop-container._checked .btn-drop dl {display:flex; justify-content:space-between; color:#222;font-size:40px;}
+.page-store .drop-container._checked .btn-drop .label {display:none;}
+.page-store .drop-container._checked .btn-drop .dt {display:block; color:#BEBEBE;}
+.page-store .drop-container._checked .btn-drop:before {display:none;}
+
