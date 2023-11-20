@@ -7,44 +7,55 @@
   </header>
   <div id="container">
     <div id="contents">
-      <section class="drop-sec" data-selector="selectDrop">
-        <div class="drop-container" data-selector="dropContainer" data-sid="depth1">
-          <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
-            <dl>
-              <dt><span class="label">지역선택 <small>(시/도)</small></span><span class="dt">지역</span></dt>
-              <dd data-selector="selected"></dd>
-            </dl>
-          </a>
-          <div class="drop-wrap">
-            <ul class="label-flex flex" data-selector="kind"></ul>
+      <form method="post" name="frm">
+        <section class="drop-sec" data-selector="selectDrop">
+          <div class="drop-container" data-selector="dropContainer" data-sid="depth1">
+            <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
+              <dl>
+                <dt><span class="label">지역선택 <small>(시/도)</small></span><span class="dt">지역</span></dt>
+                <dd data-selector="selected"></dd>
+              </dl>
+            </a>
+            <div class="drop-wrap">
+              <ul class="label-flex flex" data-selector="kind"></ul>
+            </div>
+          </div>
+
+          <div class="drop-container _disable" data-selector="dropContainer" data-sid="depth2">
+            <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
+              <dl>
+                <dt><span class="label">지역선택 <small>(구/군)</small></span><span class="dt">지역</span></dt>
+                <dd data-selector="selected"></dd>
+              </dl>
+            </a>
+            <div class="drop-wrap">
+              <ul class="label-flex flex depth2" data-selector="kind"></ul>
+            </div>
+          </div>
+
+          <div class="drop-container _disable" data-selector="dropContainer" data-sid="depth3">
+            <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
+              <dl>
+                <dt><span class="label">업종별</span><span class="dt">업종</span></dt>
+                <dd data-selector="selected"></dd>
+              </dl>
+            </a>
+            <div class="drop-wrap">
+              <ul class="label-flex flex icon" data-selector="kind"></ul>
+            </div>
+          </div>
+
+          <div class="drop-container _disable" data-selector="searchContainer">
+            <a href="javascript:void(0)" class="btn-drop search" data-action="search"><span class="txt">검색</span></a>
+          </div>
+        </section>
+        <div class="data-container" data-selector="dataContainer">
+          <ul class="list-flex flex" data-selector="listAppend"></ul>
+          <div class="map-container">
+
           </div>
         </div>
-
-        <div class="drop-container _disable" data-selector="dropContainer" data-sid="depth2">
-          <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
-            <dl>
-              <dt><span class="label">지역선택 <small>(구/군)</small></span><span class="dt">지역</span></dt>
-              <dd data-selector="selected"></dd>
-            </dl>
-          </a>
-          <div class="drop-wrap">
-            <ul class="label-flex flex depth2" data-selector="kind"></ul>
-          </div>
-        </div>
-
-        <div class="drop-container _disable" data-selector="dropContainer" data-sid="depth3">
-          <a href="javascript:void(0)" class="btn-drop" data-action="btnDrop">
-            <dl>
-              <dt><span class="label">업종별</span><span class="dt">업종</span></dt>
-              <dd data-selector="selected"></dd>
-            </dl>
-          </a>
-          <div class="drop-wrap">
-            <ul class="label-flex flex icon" data-selector="kind"></ul>
-          </div>
-        </div>
-      </section>
-
+      </form>
     </div>
   </div>
 </div>
