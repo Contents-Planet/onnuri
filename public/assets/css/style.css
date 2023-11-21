@@ -115,6 +115,7 @@ figure img {display:block; margin:0 auto;}
 .data-container .m-main {display:flex;flex-wrap:wrap; height:100%; width:100%; }
 .page-store._search .data-container {display:block;}
 .page-store .map-container {/*margin-top:100px;*/ /*padding-top:45%;*/ height:300px; width:100%;}
+.page-store .map-container #map {width:100%; height:100%;}
 .page-store .list-flex {font-size:28px;margin-top:13px;height:calc(100% - 300px); overflow:hidden;overflow-y: auto; margin:0 -15px; padding:0 15px; }
 .page-store .list-flex > li{border-bottom:1px solid #E9E9E9;padding:35px 0; width:100%;}
 .page-store .list-flex > li.non-bd {border:0;}

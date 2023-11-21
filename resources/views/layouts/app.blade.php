@@ -27,6 +27,8 @@
   <script src="//static.econtents.co.kr/_asset/_lib/cssua.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-images-loaded.min.js"></script>
   <script src="/assets/js/ND.function.js"></script>
+  {{--<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"></script>--}}
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
 </head>
 
 <body>
