@@ -33,17 +33,15 @@ var Page = {
   },
 
   GetData: function (formData, _callback) {
-    var ajaxUrl = '/assets/js/api.sample.json';
+    var ajaxUrl = '/store/getCityNames';
     $.ajax({
       type: 'get',
       dataType: 'json',
       url: ajaxUrl,
       data: formData,
-      success: function(response) {1
-        if(response.result === "ok") {
-          if (typeof _callback === 'function') {
-            _callback.call(null, response[formData.depth]);
-          }
+      success: function(response) {
+        if (typeof _callback === 'function') {
+          _callback.call(null, response);
         }
       }
     });
@@ -56,7 +54,7 @@ var Page = {
       dataType: 'json',
       url: ajaxUrl,
       data: formData,
-      success: function(response) {1
+      success: function(response) {
         if(response.result === "ok") {
           if (typeof _callback === 'function') {
             _callback.call(null, response);
@@ -74,6 +72,7 @@ var Page = {
     Page.GetData(formData, function(res){
       var html = '';
       $.each(res, function(index, row){
+
         html += ' <li>';
         html += '   <div class="label-wrap type-btn radio">';
         html += '     <input type="radio" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +"_"+ row.seq +'" data-value="'+ row.dec +'" data-action="radio"/>';
@@ -100,15 +99,6 @@ var Page = {
 
     Page.GetData(formData, function(res){
       var html = '';
-
-      /*$.each(res, function(index, row){
-        html += ' <li>';
-        html += '   <div class="label-wrap '+ (depth !== "depth3" ? 'type-btn radio' : 'type-icon checkbox') +'">';
-        html += '     <input type="'+ (depth !== "depth3" ? 'radio' : 'checkbox') +'" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="'+ (depth !== "depth3" ? 'radio' : 'chk') +'"/>';
-        html += '     <label class="txt" '+ (depth === "depth3" ? 'style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.class +'.webp)"' : '') +' for="'+ depth +'_'+ row.seq +'">'+ row.dec +' '+ (row.cnt ? '<small>('+ row.cnt +')</small>' : '')+'</label>';
-        html += '   </div>';
-        html += ' </li>';
-      })*/
 
       if(depth === "depth2") {
         $.each(res, function(index, row){
