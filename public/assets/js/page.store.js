@@ -104,6 +104,8 @@ var Page = {
           html += '   </div>';
           html += ' </li>';
         })
+
+        $("[data-selector=area]").html(formData.dec)
       } else if(depth === "depth3") {
         var max = res.length - 1;
         $.each(res, function(index, row){
@@ -124,6 +126,8 @@ var Page = {
             html += ' </li>';
           }
         })
+
+        $("[data-selector=area]").append(" > "+ formData.dec)
       }
 
       $container.find("[data-selector=dropContainer]").removeClass("_open");
@@ -134,6 +138,7 @@ var Page = {
       var $prev = $("[data-selector=dropContainer][data-sid="+ name +"]");
       $prev.find("[data-selector=selected]").html(formData.dec)
       $prev.addClass("_checked");
+
     });
   },
 
@@ -156,17 +161,89 @@ var Page = {
     }
   },
 
+  Reset : function(){
+    $("#wrap").removeClass("_search");
+    $("[data-selector=selectDrop]").find("[type=radio]").prop("checked", false);
+    $("[data-selector=selectDrop]").find("[type=checkbox]").prop("checked", false);
+    $("[data-selector=selectDrop]").find("[data-selector=dropContainer]").removeClass("_open").removeClass("_checked").addClass("_disable");
+    $("[data-selector=selectDrop]").find("[data-selector=dropContainer][data-sid=depth1]").addClass("_open").removeClass("_disable").removeClass("_checked");
+    $("[data-selector=selected]").html("");
+    $("[data-selector=listAppend], [data-selector=mapContainer]").html("");
+    $('html, body').animate({scrollTop: 0}, 300);
+  },
+
   Search : function(){
-    var depth1 = $("[name=depth1]:checked").val(),
-      depth2 = $("[name=depth2]:checked").val(),
-      depth3 = [];
-
-
-    if(var i = 0, max = $("[name=depth2]:checked").length - 1; i < max; i ++){
-      console.log(i)
+    $("[data-selector=selectDrop]").find("[data-selector=dropContainer]").removeClass("_open");
+    if(!$("[name=depth1]:checked").val()) {
+      alert("시/도를 선택하세요");
+      $("[data-selector=dropContainer][data-sid=depth1]").addClass("_open");
+      return;
     }
 
-    console.log(depth1, depth2, depth3, $("[name=frm]").serialize());
+    if(!$("[name=depth2]:checked").val()) {
+      alert("구/군을 선택하세요");
+      $("[data-selector=dropContainer][data-sid=depth2]").addClass("_open").removeClass("_disable");
+      return;
+    }
+
+    if(!$("[name=depth3]:checked").val()) {
+      alert("업종을 선택하세요");
+      $("[data-selector=dropContainer][data-sid=depth3]").addClass("_open").removeClass("_disable");
+      return;
+    }
+
+    var $fm = $("[name=frm]"),
+      formData = $fm.serialize();
+
+
+    Page.RenderData(formData, function(res){
+      var html = '';
+
+      $.each(res.data, function(index, row){
+        html += ' <li>';
+        html += '   <dl class="data-flex flex">';
+        html += '     <dt class="flex">';
+        html += '       <div class="col-ico">';
+        html += '         <span class="ico" style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.business +'.webp)"></span>';
+        html += '       </div>';
+        html += '       <div class="col-dec">';
+        html += '         <strong class="tit">'+ row.tit +'</strong>';
+        html += '         <p class="add">'+ row.add +'</p>';
+        html += '       </div>';
+        html += '     </dt>';
+        html += '     <dd>';
+        html += '       <ul class="btn-flex flex">';
+        html += '         <li><a href="tel:'+ row.tel +'" class="tel"><span class="a11y">'+ row.tel +' 전화걸기</span></a></li>';
+        html += '         <li><a href="javascript:void(0)" class="map" data-action="mapMarker"><span class="a11y">위치보기</span></a></li>';
+        html += '       </ul>';
+        html += '     </dd>';
+        html += '   </dl>';
+        html += ' </li>';
+      })
+
+      if(res.tot > 0) {
+        html += ' <li class="non-bd" data-selector="moreContainer">';
+        html += '   <a href="javascript:void(0)" class="btn-close more" data-action="moreData"><span class="txt">더보기</span></a>';
+        html += ' </li>';
+      }
+
+      $("[data-selector=moreContainer]").remove();
+      $("[data-selector=dataContainer]").addClass("_active");
+      $("[data-selector=listAppend]").append(html);
+      $("[name=page]").val(parseInt($("[name=page]").val()) + 1);
+
+      var len = $("[name=depth3]:checked").length,
+        txt = $("[name=depth3]:checked").data("value");
+
+      $("[data-selector=business]").html(txt + (len > 1 ? " 외" + (len - 1) + "건" : ''));
+      $("#wrap").addClass("_search")
+
+      var headerHeight = $("[data-selector=selectedContainer]").outerHeight(),
+        dataContainer = $("[data-selector=dott][data-sid=data]").offset().top,
+        moveTo = dataContainer -  headerHeight;
+
+      $('html, body').animate({scrollTop: moveTo}, 300);
+    })
   },
 
   Bind: function () {
@@ -193,6 +270,16 @@ var Page = {
     $("[data-action=search]").unbind("click");
     $(document).on("click", "[data-action=search]", function () {
       Page.Search()
+    })
+
+    $("[data-action=moreData]").unbind("click");
+    $(document).on("click", "[data-action=moreData]", function () {
+      Page.Search()
+    })
+
+    $("[data-action=reSearch]").unbind("click");
+    $(document).on("click", "[data-action=reSearch]", function () {
+      Page.Reset()
     })
   },
 
