@@ -64,7 +64,7 @@
             <div class="map-container" data-selector="mapContainer">
               <div id="map"></div>
             </div>
-            <ul class="list-flex flex" data-selector="listAppend"></ul>
+            <ul class="list-flex" data-selector="listAppend"></ul>
           </div>
         </div>
       </form>

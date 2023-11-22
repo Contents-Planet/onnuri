@@ -1,15 +1,15 @@
 var CaseSwiper = undefined,
   nowLocation = "";
 
-var geocoder = new kakao.maps.services.Geocoder(),
-  mapContainer = document.getElementById('map'), // 지도를 표시할 div
+var geocoder = new kakao.maps.services.Geocoder();
+  /*mapContainer = document.getElementById('map'), // 지도를 표시할 div
   mapOption = {
     center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
     level: 8 // 지도의 확대 레벨
-  };
+  };*/
 
 // 지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption);
+//var map = new kakao.maps.Map(mapContainer, mapOption);
 
 var clickedOverlay = null;
 
@@ -142,8 +142,6 @@ var Page = {
           }
           liCount++;
         })
-
-
       }
 
       var $container = $("[data-selector=selectDrop]"),
@@ -188,6 +186,7 @@ var Page = {
     $("[data-selector=selectDrop]").find("[data-selector=dropContainer]").removeClass("_open").removeClass("_checked").addClass("_disable");
     $("[data-selector=selectDrop]").find("[data-selector=dropContainer][data-sid=depth1]").addClass("_open").removeClass("_disable").removeClass("_checked");
     $("[data-selector=selected]").html("");
+    $("[data-selector=listAppend]").html("");
     $('html, body').animate({scrollTop: 0}, 300);
   },
 
@@ -217,8 +216,10 @@ var Page = {
       formData = $fm.serialize();
 
     Page.RenderData(formData, function(res){
+      console.log(formData, res)
       var $positions = new Array(),
         html = '';
+
 
       $.each(res.data, function(index, row){
         html += ' <li>';
@@ -242,15 +243,13 @@ var Page = {
         html += ' </li>';
 
         geocoder.addressSearch(row.add, function (result, status) {
-          if (status === kakao.maps.services.Status.OK) {
-            var jsonObj		= new Object();
-            jsonObj.tit = row.tit;
-            jsonObj.add = row.add;
-            jsonObj.business = row.business;
-            jsonObj.lat = result[0].y;
-            jsonObj.lng = result[0].x;
-            $positions.push(jsonObj);
-          }
+          var jsonObj		= new Object();
+          jsonObj.tit = row.tit;
+          jsonObj.add = row.add;
+          jsonObj.business = row.business;
+          jsonObj.lat = status === kakao.maps.services.Status.OK ? result[0].y : '';
+          jsonObj.lng = status === kakao.maps.services.Status.OK ? result[0].x : '';
+          $positions.push(jsonObj);
         })
       })
 
@@ -380,6 +379,36 @@ var Map = {
         disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
       });
 
+
+      /*var ajaxUrl = '/assets/js/api.sample3.json';
+      $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: ajaxUrl,
+        success: function(response) {
+          console.log(response.positions)
+          console.log(data.positions)
+
+          var markers = $(data.positions).map(function(i, position) {
+            return new kakao.maps.Marker({
+              position : new kakao.maps.LatLng(position.lat, position.lng)
+            });
+          });
+
+          // 클러스터러에 마커들을 추가합니다
+          clusterer.addMarkers(markers);
+
+          kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+            // 현재 지도 레벨에서 1레벨 확대한 레벨
+            var level = map.getLevel()-1;
+            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+            map.setLevel(level, {anchor: cluster.getCenter()});
+
+            console.log(clusterer)
+          });
+        }
+      });*/
+
       var markers = $(data.positions).map(function(i, position) {
         return new kakao.maps.Marker({
           position : new kakao.maps.LatLng(position.lat, position.lng)
@@ -390,11 +419,13 @@ var Map = {
       clusterer.addMarkers(markers);
 
       kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-            // 현재 지도 레벨에서 1레벨 확대한 레벨
-            var level = map.getLevel()-1;
-            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-            map.setLevel(level, {anchor: cluster.getCenter()});
-          });
+        // 현재 지도 레벨에서 1레벨 확대한 레벨
+        var level = map.getLevel()-1;
+        // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+        map.setLevel(level, {anchor: cluster.getCenter()});
+
+        console.log(clusterer)
+      });
 
       /*Map.SearchAddrFromCoords(center, function(res) {
         var depth1 = res[0].region_1depth_name,
