@@ -40,7 +40,6 @@ var Page = {
       url: ajaxUrl,
       data: formData,
       success: function(response) {
-
         if (typeof _callback === 'function') {
           _callback.call(null, response);
         }
@@ -72,7 +71,6 @@ var Page = {
     Page.GetData(formData, function(res){
       var html = '';
       $.each(res, function(index, row){
-
         html += ' <li>';
         html += '   <div class="label-wrap type-btn radio">';
         html += '     <input type="radio" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +"_"+ row.seq +'" data-value="'+ row.dec +'" data-action="radio"/>';
@@ -87,10 +85,10 @@ var Page = {
   Change: function (e) {
     var name = e.attr("name"),
       step = name.replace("depth", ""),
-      depth = "depth"+ (parseInt(step) + 1),
       val = $("[name=depth"+ step +"]:checked").val(),
       dec1 = $("[name=depth1]:checked").data("value"),
       dec2 = step === "2" ? $("[name=depth2]:checked").data("value") : "",
+      depth = "depth"+ (parseInt(step) + parseInt(step === "1" && val === "5" ? "2" : "1")),
       formData = {
         depth : depth,
         val : val,
@@ -98,24 +96,19 @@ var Page = {
         dec2 : dec2
       }
 
-
-
     var $container = $("[data-selector=selectDrop]"),
       $drop = $("[data-selector=dropContainer][data-sid="+ depth +"]");
 
 
     Page.GetData(formData, function(res){
       if(step === "1" && val === "5") {
-
         $("[data-selector=dropContainer][data-sid=depth2]").hide();
       } else {
         $("[data-selector=dropContainer][data-sid=depth2]").show();
       }
 
       var html = '';
-
       if(depth === "depth2") {
-
         $.each(res, function(index, row){
           html += ' <li>';
           html += '   <div class="label-wrap type-btn radio">';
@@ -151,8 +144,11 @@ var Page = {
           liCount++;
         })
 
-        $("[data-selector=area]").append(" > "+ formData.dec2)
+
       }
+
+      var $container = $("[data-selector=selectDrop]"),
+        $drop = $("[data-selector=dropContainer][data-sid="+ formData.depth +"]");
 
       $container.find("[data-selector=dropContainer]").removeClass("_open");
       $drop.addClass("_open").removeClass("_disable");
@@ -162,6 +158,8 @@ var Page = {
       var $prev = $("[data-selector=dropContainer][data-sid="+ name +"]");
       $prev.find("[data-selector=selected]").html(formData["dec"+ step])
       $prev.addClass("_checked");
+
+      $("[data-selector=area]").html(formData.dec1 + (formData.dec2 ? " > "+ formData.dec2 : ""));
     });
   },
 
@@ -202,10 +200,12 @@ var Page = {
       return;
     }
 
-    if(!$("[name=depth2]:checked").val()) {
-      alert("구/군을 선택하세요");
-      $("[data-selector=dropContainer][data-sid=depth2]").addClass("_open").removeClass("_disable");
-      return;
+    if($("[name=depth1]:checked").val() !== "5") {
+      if(!$("[name=depth2]:checked").val()) {
+        alert("구/군을 선택하세요");
+        $("[data-selector=dropContainer][data-sid=depth2]").addClass("_open").removeClass("_disable");
+        return;
+      }
     }
 
     if(!$("[name=depth3]:checked").val()) {
@@ -217,9 +217,9 @@ var Page = {
     var $fm = $("[name=frm]"),
       formData = $fm.serialize();
 
-
     Page.RenderData(formData, function(res){
-      var html = '';
+      var $positions = new Array(),
+        html = '';
 
       $.each(res.data, function(index, row){
         html += ' <li>';
@@ -241,6 +241,18 @@ var Page = {
         html += '     </dd>';
         html += '   </dl>';
         html += ' </li>';
+
+        geocoder.addressSearch(row.add, function (result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+            var jsonObj		= new Object();
+            jsonObj.tit = row.tit;
+            jsonObj.add = row.add;
+            jsonObj.business = row.business;
+            jsonObj.lat = result[0].y;
+            jsonObj.lng = result[0].x;
+            $positions.push(jsonObj);
+          }
+        })
       })
 
       if(res.tot > 0) {
@@ -266,10 +278,13 @@ var Page = {
 
       /*map render*/
       var depth1 = $("[name=depth1]:checked").data("value"),
-        depth2 = $("[name=depth2]:checked").data("value");
-
-      Map.AddMarker(depth1, depth2, res.data)
-
+        depth2 = depth1 !== "5" ? $("[name=depth2]:checked").data("value") : "",
+        $reData = {
+          "depth1" : depth1,
+          "depth2" : depth2,
+          "positions" : $positions
+        };
+      Map.AddMarker($reData)
       $('html, body').animate({scrollTop: moveTo}, 300);
     })
   },
@@ -345,8 +360,9 @@ var Map = {
     })
   },
 
-  AddMarker : function(depth1, depth2, data){
-    Map.CurrentLocation((depth1 +' '+ depth2), function(res) {
+  AddMarker : function(data){
+    console.log(data)
+    Map.CurrentLocation((data.depth1 + (data.depth2 ? ' '+ data.depth2 : "")), function(res) {
       var mapContainer = document.getElementById('map'),
         mapOption = {
           center: new kakao.maps.LatLng(res.lon, res.lat),
@@ -357,19 +373,51 @@ var Map = {
         center = map.getCenter(),
         level = map.getLevel();
 
-      Map.SearchAddrFromCoords(center, function(res) {
+      /*클러스터로*/
+      var clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+        minLevel: 1, // 클러스터 할 최소 지도 레벨
+        disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+      });
+
+      var markers = $(data.positions).map(function(i, position) {
+        return new kakao.maps.Marker({
+          position : new kakao.maps.LatLng(position.lat, position.lng)
+        });
+      });
+
+      // 클러스터러에 마커들을 추가합니다
+      clusterer.addMarkers(markers);
+
+      kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+            // 현재 지도 레벨에서 1레벨 확대한 레벨
+            var level = map.getLevel()-1;
+            // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+            map.setLevel(level, {anchor: cluster.getCenter()});
+          });
+
+      /*Map.SearchAddrFromCoords(center, function(res) {
         var depth1 = res[0].region_1depth_name,
           depth2 = level > 7 ? '' : res[0].region_2depth_name,
           depth3 = level > 7 ? '' : res[0].region_3depth_name;
 
-        var $addData = data;
-        $.each($addData, function (index, row) {
-          //var place = !row.place ? 'https://map.naver.com/v5/search/'+ (encodeURI(row.depth1 +' '+ row.depth2 +' '+ row.depth3 +' '+ row.store)) +'/place/' : row.place;
+        /!*var markers = $($positions).map(function(i, row) {
+          return new kakao.maps.Marker({
+            position : new kakao.maps.LatLng(row.lat, row.lng)
+          });
+        });
 
+        // 클러스터러에 마커들을 추가합니다
+        clusterer.addMarkers(markers);*!/
+
+        /!*$.each($addData, function (index, row) {
+          //var place = !row.place ? 'https://map.naver.com/v5/search/'+ (encodeURI(row.depth1 +' '+ row.depth2 +' '+ row.depth3 +' '+ row.store)) +'/place/' : row.place;
           Map.SearchCordsFromAdd(row.add, function (coords) {
+
             // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
             var selectedMarker = null; // 클릭한 마커를 담을 변수
-            var imageSrc = "https://static.econtents.co.kr/_img/onnuri/type"+ row.business +".webp", // 마커이미지의 주소입니다
+            var imageSrc = "https://static.econtents.co.kr/_img/onnuri/marker"+ row.business +".webp", // 마커이미지의 주소입니다
               imageSize = new kakao.maps.Size(35, 44), // 마커이미지의 크기입니다
               imageOption = {offset: new kakao.maps.Point(18, 44)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
               markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -384,8 +432,6 @@ var Map = {
               clickable: true
             });
 
-
-
             var infowindow = new kakao.maps.InfoWindow({
               content: row.store // 인포윈도우에 표시할 내용
             });
@@ -398,11 +444,11 @@ var Map = {
 
             marker.setMap(map);
 
-            /*var content = '<div class="customoverlay">';
+            /!*var content = '<div class="customoverlay">';
             content += '  <a href="' + place + '" target="_blank">';
             content += '    <span class="strore">' + row.store + '</span>';
             content += '  </a>';
-            content += '</div>';*/
+            content += '</div>';*!/
 
             var customOverlay = new kakao.maps.CustomOverlay({
               position: coords,
@@ -446,8 +492,8 @@ var Map = {
               selectedMarker = marker;
             });
           })
-        });
-      })
+        });*!/
+      })*/
     })
   },
 }
