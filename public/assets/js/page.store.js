@@ -68,11 +68,9 @@ var Page = {
     var formData = {
       depth : depth
     }
-
     Page.GetData(formData, function(res){
       var html = '';
       $.each(res, function(index, row){
-
         html += ' <li>';
         html += '   <div class="label-wrap type-btn radio">';
         html += '     <input type="radio" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +"_"+ row.seq +'" data-value="'+ row.dec +'" data-action="radio"/>';
@@ -88,18 +86,32 @@ var Page = {
     var name = e.attr("name"),
       step = name.replace("depth", ""),
       depth = "depth"+ (parseInt(step) + 1),
+      val = $("[name=depth"+ step +"]:checked").val(),
+      dec1 = $("[name=depth1]:checked").data("value"),
+      dec2 = step === "2" ? $("[name=depth2]:checked").data("value") : "",
       formData = {
         depth : depth,
-        val : $("[name="+ name +"]:checked").val(),
-        dec : $("[name="+ name +"]:checked").data("value")
+        val : val,
+        dec1 : dec1,
+        dec2 : dec2
       }
+
+    console.log(formData)
 
     var $container = $("[data-selector=selectDrop]"),
       $drop = $("[data-selector=dropContainer][data-sid="+ depth +"]");
 
+    console.log("step : "+ step, "val : "+ val, "dec1 : "+ dec1, "dec2 : "+ dec2)
     Page.GetData(formData, function(res){
-      var html = '';
+      if(step === "1" && val === "5") {
+        console.log("세종")
+        $("[data-selector=dropContainer][data-sid=depth2]").hide();
+      } else {
+        $("[data-selector=dropContainer][data-sid=depth2]").show();
+      }
 
+      var html = '';
+      console.log(res)
       if(depth === "depth2") {
         $.each(res, function(index, row){
           html += ' <li>';
@@ -110,7 +122,7 @@ var Page = {
           html += ' </li>';
         })
 
-        $("[data-selector=area]").html(formData.dec)
+        $("[data-selector=area]").html(formData.dec1)
       } else if(depth === "depth3") {
         var max = res.length - 1;
         $.each(res, function(index, row){
@@ -132,7 +144,7 @@ var Page = {
           }
         })
 
-        $("[data-selector=area]").append(" > "+ formData.dec)
+        $("[data-selector=area]").append(" > "+ formData.dec2)
       }
 
       $container.find("[data-selector=dropContainer]").removeClass("_open");
@@ -141,9 +153,8 @@ var Page = {
 
       /*이전 탭 변경*/
       var $prev = $("[data-selector=dropContainer][data-sid="+ name +"]");
-      $prev.find("[data-selector=selected]").html(formData.dec)
+      $prev.find("[data-selector=selected]").html(formData["dec"+ step])
       $prev.addClass("_checked");
-
     });
   },
 
