@@ -52,6 +52,48 @@ class StoreController extends Controller
     return json_encode($return_data);
   }
 
+  public function getStoreList(Request $request){
+
+    $depth2City = 'city_name.depth2.'.$request->input('depth1').'';
+    $depth2CityArray = config($depth2City);
+    $industry_code = config("city_name.industry_code");
+    $depth2Index = $request->input('depth2')-1;
+    $depthDec = $depth2CityArray[$depth2Index]['dec'];
+
+    $page = $request->input('page') ?? 1;
+    $pageLimit = 10;
+    $offsetNum = ($page-1) * $pageLimit;
+
+    $stores = Store::where("addres_code",$request->depth1)
+            ->where("addres_depth_2",$depthDec)
+            ->where("industry_code",$industry_code[$request->depth3])
+            ->offset($offsetNum)
+            ->limit($pageLimit)
+            ;
+
+    $data = [];
+
+    foreach($stores->get() as $list){
+      $data[] = [
+        "seq" => $list->seq,
+        "tit" => $list->franchise_name,
+        "add" => $list->addres." ".$list->addres_depth_detail ?? '',
+        "business" => $list->emoji_code,
+        "market_name" => $list->market_name,
+      ];
+    }
+
+    $returnArray = [
+      "totalCount" => $stores->count(),
+      "totalPage" => ceil($stores->count() / 20),
+      "page" => $page,
+      "listNum" => $pageLimit,
+      "data" => $data,
+    ];
+
+    return json_encode($returnArray);
+  }
+
   public function findStore(Request $request)
   {
     exit;

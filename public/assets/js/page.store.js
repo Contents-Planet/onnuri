@@ -49,17 +49,16 @@ var Page = {
   },
 
   RenderData: function (formData, _callback) {
-    var ajaxUrl = '/assets/js/api.sample2.json';
+    var ajaxUrl = '/store/getStoreList';
+
     $.ajax({
       type: 'get',
       dataType: 'json',
       url: ajaxUrl,
       data: formData,
       success: function(response) {
-        if(response.result === "ok") {
-          if (typeof _callback === 'function') {
-            _callback.call(null, response);
-          }
+        if (typeof _callback === 'function') {
+          _callback.call(null, response);
         }
       }
     });
@@ -97,8 +96,6 @@ var Page = {
         dec1 : dec1,
         dec2 : dec2
       }
-
-
 
     var $container = $("[data-selector=selectDrop]"),
       $drop = $("[data-selector=dropContainer][data-sid="+ depth +"]");
@@ -235,7 +232,7 @@ var Page = {
         html += '     </dt>';
         html += '     <dd>';
         html += '       <ul class="btn-flex flex">';
-        html += '         <li><a href="tel:'+ row.tel +'" class="tel"><span class="a11y">'+ row.tel +' 전화걸기</span></a></li>';
+        // html += '         <li><a href="tel:'+ row.tel +'" class="tel"><span class="a11y">'+ row.tel +' 전화걸기</span></a></li>';
         html += '         <li><a href="javascript:void(0)" class="map" data-action="mapMarker"><span class="a11y">위치보기</span></a></li>';
         html += '       </ul>';
         html += '     </dd>';
@@ -252,7 +249,7 @@ var Page = {
       $("[data-selector=moreContainer]").remove();
       $("[data-selector=dataContainer]").addClass("_active");
       $("[data-selector=listAppend]").append(html);
-      $("[name=page]").val(parseInt($("[name=page]").val()) + 1);
+      $("[name=page]").val(parseInt($("[name=page]").val()));
 
       var len = $("[name=depth3]:checked").length,
         txt = $("[name=depth3]:checked").data("value");
