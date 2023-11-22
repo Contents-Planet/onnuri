@@ -41,8 +41,12 @@ class StoreController extends Controller
       foreach($stores as $list){
         $return_data[$list->industry_code]['isActive'] = "1";
         $return_data[$list->industry_code]['count'] = $list->count;
-      }
 
+      }
+      $isActive = array_column( $return_data, 'isActive');
+      $seq = array_column($return_data, 'seq');
+
+      array_multisort($isActive, SORT_DESC, $seq, $return_data);
     };
 
     return json_encode($return_data);
