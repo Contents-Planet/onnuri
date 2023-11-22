@@ -34,19 +34,23 @@ class StoreController extends Controller
     } else {
       $return_data = config("city_name.depth3");
 
-      $stores = Store::selectRaw("industry_code,count(1) as count")->where('addres_depth_1','서울')->where('addres_depth_2','강남구')
-      ->groupBy('industry_code')
-      ->get();
+      $stores = Store::selectRaw("industry_code,count(1) as count")
+                ->where('addres_depth_1',$request->input('dec1'))
+                ->where('addres_depth_2',$request->input('dec2'))
+                ->groupBy('industry_code')
+                ->get();
 
       foreach($stores as $list){
         $return_data[$list->industry_code]['isActive'] = "1";
         $return_data[$list->industry_code]['count'] = $list->count;
 
       }
+
       $isActive = array_column( $return_data, 'isActive');
       $seq = array_column($return_data, 'seq');
 
       array_multisort($isActive, SORT_DESC, $seq, $return_data);
+
     };
 
     return json_encode($return_data);
