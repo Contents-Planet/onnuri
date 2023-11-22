@@ -40,6 +40,7 @@ var Page = {
       url: ajaxUrl,
       data: formData,
       success: function(response) {
+
         if (typeof _callback === 'function') {
           _callback.call(null, response);
         }
@@ -71,6 +72,7 @@ var Page = {
     Page.GetData(formData, function(res){
       var html = '';
       $.each(res, function(index, row){
+
         html += ' <li>';
         html += '   <div class="label-wrap type-btn radio">';
         html += '     <input type="radio" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +"_"+ row.seq +'" data-value="'+ row.dec +'" data-action="radio"/>';
@@ -96,23 +98,24 @@ var Page = {
         dec2 : dec2
       }
 
-    console.log(formData)
+
 
     var $container = $("[data-selector=selectDrop]"),
       $drop = $("[data-selector=dropContainer][data-sid="+ depth +"]");
 
-    console.log("step : "+ step, "val : "+ val, "dec1 : "+ dec1, "dec2 : "+ dec2)
+
     Page.GetData(formData, function(res){
       if(step === "1" && val === "5") {
-        console.log("세종")
+
         $("[data-selector=dropContainer][data-sid=depth2]").hide();
       } else {
         $("[data-selector=dropContainer][data-sid=depth2]").show();
       }
 
       var html = '';
-      console.log(res)
+
       if(depth === "depth2") {
+
         $.each(res, function(index, row){
           html += ' <li>';
           html += '   <div class="label-wrap type-btn radio">';
@@ -124,24 +127,28 @@ var Page = {
 
         $("[data-selector=area]").html(formData.dec1)
       } else if(depth === "depth3") {
+
         var max = res.length - 1;
+        var liCount = 0;
         $.each(res, function(index, row){
-          html += ' <li '+ (index > 18 ? 'class="hide" data-selector="hide"' : '') +'>';
+
+          html += ' <li '+ (liCount > 18 ? 'class="hide" data-selector="hide"' : '') +'>';
           html += '   <div class="label-wrap type-icon checkbox '+ (row.isActive == 0 ? '_disable' : '') +'" >';
           html += '     <input type="checkbox" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="chk" '+ (row.isActive === 0 ? 'disable' : '') +'/>';
           html += '     <label class="txt" for="'+ depth +'_'+ row.seq +'" style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.class +'.webp)">'+ row.dec +'</label>';
           html += '   </div>';
           html += ' </li>';
-          if(index === 18) {
+          if(liCount === 18) {
             html += ' <li>';
             html += '   <a href="javascript:void(0)" data-action="more" data-sid="show" class="btn-more"><span class="txt">더보기</span></a>';
             html += ' </li>';
           }
-          if(index === max) {
+          if(liCount === max) {
             html += ' <li class="w100 hide" data-selector="hide">';
             html += '   <a href="javascript:void(0)" data-action="more" data-sid="hide" class="btn-close"><span class="txt">접기</span></a>';
             html += ' </li>';
           }
+          liCount++;
         })
 
         $("[data-selector=area]").append(" > "+ formData.dec2)
@@ -377,7 +384,7 @@ var Map = {
               clickable: true
             });
 
-            console.log(marker)
+
 
             var infowindow = new kakao.maps.InfoWindow({
               content: row.store // 인포윈도우에 표시할 내용

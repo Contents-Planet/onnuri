@@ -21,5 +21,6 @@ Route::prefix('/store')->group(function () {
     Route::get('/list', [StoreController::class, 'list'])->name('store.list');
     Route::get('/', [StoreController::class, 'index'])->name('store');
     Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
+    Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
 
 });

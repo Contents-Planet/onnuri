@@ -8,15 +8,21 @@ class Store extends Model
     protected $table = 'store';
     protected $primaryKey = 'seq';
 
+
+    const CREATED_AT = null;
+    const UPDATED_AT = null;
+
+
     protected $fillable = [
       "business_number",
       "franchise_name",
       "franchise_number",
-      "Industry_code",
-      "Industry_name",
+      "industry_code",
+      "industry_name",
       "market_code",
       "market_name",
       "addres_code",
+      "addres",
       "addres_depth_1",
       "addres_depth_2",
       "addres_depth_3",
