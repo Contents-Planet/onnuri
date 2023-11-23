@@ -17,26 +17,11 @@ var Page = {
     }
   },
 
-  GetData: function (formData, _callback) {
-    var ajaxUrl = '/store/getCityNames';
-    $.ajax({
-      type: 'get',
-      dataType: 'json',
-      url: ajaxUrl,
-      data: formData,
-      success: function(response) {
-        if (typeof _callback === 'function') {
-          _callback.call(null, response);
-        }
-      }
-    });
-  },
-
   Render: function (depth) {
     var formData = {
       depth : depth
     }
-    Page.GetData(formData, function(res){
+    API.GetData(formData, 'getCityNames',function(res){
       var html = '';
       $.each(res, function(index, row){
         html += ' <li>';
@@ -64,7 +49,7 @@ var Page = {
         dec2 : dec2
       }
 
-    Page.GetData(formData, function(res){
+    API.GetData(formData, 'getCityNames',function(res){
       if(step === "1" && val === "5") {
         $("[data-selector=dropContainer][data-sid=depth2]").hide();
       } else {

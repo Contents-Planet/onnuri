@@ -7,6 +7,10 @@ $(function(){
 })
 
 var Page = {
+  Reset : function(){
+    location.href = "/store";
+  },
+
   Load: function () {
     var depth1 = ND.RETURN.param("depth1"),
       depth2 = ND.RETURN.param("depth2"),
@@ -23,156 +27,51 @@ var Page = {
     console.log("depth1 : "+ depth1, "depth2 : "+ depth2, "depth3 : "+ depth3, "page : "+ page)
 
     var formData = {
-      "depth1" : depth1,
-      "depth2" : depth2,
+      "depth1" : parseInt(depth1),
+      "depth2" : parseInt(depth2),
       "depth3" : depth3,
       "page" : page,
     }
 
+    /* search bar render */
+    API.GetData({"depth" : "depth1"}, 'getCityNames', function(res) {
+      console.log(res)
+      $.each(res, function(index, row){
+        if(row.seq === formData.depth1) {
+          var depth1 = row.dec,
+            depth2 = '';
+
+          console.log(depth1)
+          API.GetData({"depth" : "depth2", "val" : formData.depth1}, 'getCityNames',function(res2) {
+            $.each(res2, function(index2, row2){
+              if(row2.seq === formData.depth2) {
+                depth2 = row2.dec;
+              }
+            })
+            $("[data-selector=area]").html(depth1 + (depth2 ? " > "+ depth2 : ""));
+          })
+        }
+      })
+    })
+
+    API.GetData({"depth" : "depth3"}, 'getCityNames', function(res) {
+      $.each(res, function(index, row){
+        if(row.seq === formData.depth3[0]) {
+          $("[data-selector=business]").html(row.dec + (formData.depth3.length > 1 ? "외 " + (formData.depth3.length - 1) + "건" : ''));
+        }
+      })
+    })
+
+    /* data render */
+    //Page.Search(formData);
+  },
+
+  Search : function(formData){
     console.log(formData)
-
-  },
-
-  Change: function (e) {
-    var name = e.attr("name"),
-      step = name.replace("depth", ""),
-      val = $("[name=depth"+ step +"]:checked").val(),
-      dec1 = $("[name=depth1]:checked").data("value"),
-      dec2 = step === "2" ? $("[name=depth2]:checked").data("value") : "",
-      depth = "depth"+ (parseInt(step) + parseInt(step === "1" && val === "5" ? "2" : "1")),
-      formData = {
-        depth : depth,
-        val : val,
-        dec1 : dec1,
-        dec2 : dec2
-      }
-
-    var $container = $("[data-selector=selectDrop]"),
-      $drop = $("[data-selector=dropContainer][data-sid="+ depth +"]");
-
-
-    Page.GetData(formData, function(res){
-      if(step === "1" && val === "5") {
-        $("[data-selector=dropContainer][data-sid=depth2]").hide();
-      } else {
-        $("[data-selector=dropContainer][data-sid=depth2]").show();
-      }
-
-      var html = '';
-      if(depth === "depth2") {
-        $.each(res, function(index, row){
-          html += ' <li>';
-          html += '   <div class="label-wrap type-btn radio">';
-          html += '     <input type="radio" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="radio"/>';
-          html += '     <label class="txt" for="'+ depth +'_'+ row.seq +'">'+ row.dec +' '+ (row.cnt ? '<small>('+ row.cnt +')</small>' : '')+'</label>';
-          html += '   </div>';
-          html += ' </li>';
-        })
-
-        $("[data-selector=area]").html(formData.dec1)
-      }
-      else if(depth === "depth3") {
-
-        var max = res.length - 1;
-        var liCount = 0;
-        $.each(res, function(index, row){
-
-          html += ' <li '+ (liCount > 18 ? 'class="hide" data-selector="hide"' : '') +'>';
-          html += '   <div class="label-wrap type-icon checkbox '+ (row.isActive == 0 ? '_disable' : '') +'" >';
-          html += '     <input type="checkbox" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="chk" '+ (row.isActive === 0 ? 'disable' : '') +'/>';
-          html += '     <label class="txt" for="'+ depth +'_'+ row.seq +'" style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.class +'.webp)">'+ row.dec +'</label>';
-          html += '   </div>';
-          html += ' </li>';
-          if(liCount === 18) {
-            html += ' <li>';
-            html += '   <a href="javascript:void(0)" data-action="more" data-sid="show" class="btn-more"><span class="txt">더보기</span></a>';
-            html += ' </li>';
-          }
-          if(liCount === max) {
-            html += ' <li class="w100 hide" data-selector="hide">';
-            html += '   <a href="javascript:void(0)" data-action="more" data-sid="hide" class="btn-close"><span class="txt">접기</span></a>';
-            html += ' </li>';
-          }
-          liCount++;
-        })
-      }
-
-      var $container = $("[data-selector=selectDrop]"),
-        $drop = $("[data-selector=dropContainer][data-sid="+ formData.depth +"]");
-
-      $container.find("[data-selector=dropContainer]").removeClass("_open");
-      $drop.addClass("_open").removeClass("_disable");
-      $drop.find("[data-selector=kind]").html(html)
-
-      /*이전 탭 변경*/
-      var $prev = $("[data-selector=dropContainer][data-sid="+ name +"]");
-      $prev.find("[data-selector=selected]").html(formData["dec"+ step])
-      $prev.addClass("_checked");
-
-      $("[data-selector=area]").html(formData.dec1 + (formData.dec2 ? " > "+ formData.dec2 : ""));
-    });
-  },
-
-  More: function (e) {
-    var sid = e.data("sid");
-    if(sid === "show") {
-      $("[data-selector=hide]").addClass("_active");
-      $("[data-action=more][data-sid=show]").closest("li").addClass("_hide");
-    } else if(sid === "hide") {
-      $("[data-selector=hide]").removeClass("_active");
-      $("[data-action=more][data-sid=show]").closest("li").removeClass("_hide");
-    }
-  },
-
-  ActiveSearch : function(){
-    if($("[data-action=chk]:checked").length > 0) {
-      $("[data-selector=searchContainer]").removeClass("_disable");
-    } else {
-      $("[data-selector=searchContainer]").addClass("_disable");
-    }
-  },
-
-  Reset : function(){
-    $("#wrap").removeClass("_search");
-    $("[data-selector=selectDrop]").find("[type=radio]").prop("checked", false);
-    $("[data-selector=selectDrop]").find("[type=checkbox]").prop("checked", false);
-    $("[data-selector=selectDrop]").find("[data-selector=dropContainer]").removeClass("_open").removeClass("_checked").addClass("_disable");
-    $("[data-selector=selectDrop]").find("[data-selector=dropContainer][data-sid=depth1]").addClass("_open").removeClass("_disable").removeClass("_checked");
-    $("[data-selector=selected]").html("");
-    $("[data-selector=listAppend]").html("");
-    $('html, body').animate({scrollTop: 0}, 300);
-  },
-
-  Search : function(){
-    $("[data-selector=selectDrop]").find("[data-selector=dropContainer]").removeClass("_open");
-    if(!$("[name=depth1]:checked").val()) {
-      alert("시/도를 선택하세요");
-      $("[data-selector=dropContainer][data-sid=depth1]").addClass("_open");
-      return;
-    }
-
-    if($("[name=depth1]:checked").val() !== "5") {
-      if(!$("[name=depth2]:checked").val()) {
-        alert("구/군을 선택하세요");
-        $("[data-selector=dropContainer][data-sid=depth2]").addClass("_open").removeClass("_disable");
-        return;
-      }
-    }
-
-    if(!$("[name=depth3]:checked").val()) {
-      alert("업종을 선택하세요");
-      $("[data-selector=dropContainer][data-sid=depth3]").addClass("_open").removeClass("_disable");
-      return;
-    }
-
-    var $fm = $("[name=frm]"),
-      formData = $fm.serialize();
-
-    Page.RenderData(formData, function(res){
+    API.GetData(formData, 'getStoreList', function(res){
       console.log(formData, res)
       var $positions = new Array(),
         html = '';
-
 
       $.each(res.data, function(index, row){
         html += ' <li>';
