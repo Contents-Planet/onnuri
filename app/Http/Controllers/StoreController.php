@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Store;
 use PHPUnit\Util\Json;
 
-class StoreController extends Controller
+class StoreController extends OnnuriController
 {
 
   public function index(Request $request)
