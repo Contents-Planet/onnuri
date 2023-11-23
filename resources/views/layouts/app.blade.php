@@ -27,6 +27,7 @@
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/cssua.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-images-loaded.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.6.0/clipboard.min.js"></script>
 
   <script src="/assets/js/ND.function.js"></script>
   <script src="/assets/js/page.common.js"></script>

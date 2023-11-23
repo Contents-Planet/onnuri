@@ -24,7 +24,7 @@ var clickedOverlay = null;
 var depth1 = ND.RETURN.param("depth1"),
   depth2 = ND.RETURN.param("depth2"),
   depth3 = [],
-  page = ND.RETURN.param("page");
+  page = ND.RETURN.param("page")
 
 var _tempUrl = window.location.search.substring(1),
   _tempArray = _tempUrl.split('&');
@@ -33,17 +33,36 @@ $.each(_tempArray, function(index, row){
     depth3.push(row.replace("depth3=", ""));
   }
 })
+
 var formData = {
   "depth1" : parseInt(depth1),
   "depth2" : parseInt(depth2),
   "depth3" : depth3,
   "page" : page,
 }
-console.log("depth1 : "+ depth1, "depth2 : "+ depth2, "depth3 : "+ depth3, "page : "+ page)
-console.log(formData)
+
+var $reData = {
+  "depth1" : "",
+  "depth2" : "",
+  "positions" : "",
+  "coards" : ""
+};
+var $positions = [];
+//console.log("depth1 : "+ depth1, "depth2 : "+ depth2, "depth3 : "+ depth3, "page : "+ page)
+//console.log(formData)
+//console.log($positions)
 
 $(function(){
   Page.Init();
+
+  var clipboard = new Clipboard('#copy');
+  clipboard.on('success', function(e) {
+    alert("텍스트 복사가 완료되었습니다.");
+  });
+
+  clipboard.on('error', function(e) {
+    alert("Ctrl + C 를 눌러서 복사해 주세요.");
+  });
 })
 
 var Page = {
@@ -54,6 +73,7 @@ var Page = {
   Load: function () {
     /* search bar render */
     $("[name=page]").val(formData.page)
+    Page.NowUrl();
     API.GetData({"depth" : "depth1"}, 'getCityNames', function(res) {
       $.each(res, function(index, row){
         if(row.seq === formData.depth1) {
@@ -79,7 +99,26 @@ var Page = {
               })
               /* data render */
               Page.RenderMap(depth1 + (depth2 ? " "+ depth2 : ""));
-              Page.RenderData(formData);
+
+              if(formData.page > 1) {
+                reData = {
+                  "depth1" : formData.depth1,
+                  "depth2" : formData.depth1,
+                  "depth3" : formData.depth3,
+                  "page": 1
+                }
+                for(var i = 1, max = formData.page; i <= max; i++) {
+                  var reData = {
+                    "depth1" : formData.depth1,
+                    "depth2" : formData.depth2,
+                    "depth3" : formData.depth3,
+                    "page": i
+                  }
+                  Page.RenderData(reData);
+                }
+              } else {
+                Page.RenderData(formData);
+              }
             })
           })
         }
@@ -87,12 +126,16 @@ var Page = {
     })
   },
 
+  NowUrl: function () {
+    $("[data-action=clipboard]").attr("data-clipboard-text", location.href)
+  },
+
   RenderData : function(formData, _callback){
     API.GetData(formData, 'getStoreList', function(res){
-      var $positions = [],
-        $coards = [],
-        html = '';
+      //console.log(formData)
+      $("[name=totalPage]").val(res.totalPage)
 
+      var html = '';
       $.each(res.data, function(index, row){
         html += ' <li>';
         html += '   <dl class="data-flex flex">';
@@ -124,8 +167,9 @@ var Page = {
         })
         $positions.push(jsonObj);
       })
+      //console.log($positions)
 
-      if(res.totalPage > res.page) {
+      if(Math.ceil($("[name=totalPage]").val())  > res.page) {
         html += ' <li class="non-bd" data-selector="moreContainer">';
         html += '   <a href="javascript:void(0)" class="btn-close more" data-action="moreData"><span class="txt">더보기</span></a>';
         html += ' </li>';
@@ -133,26 +177,32 @@ var Page = {
       $("[data-selector=moreContainer]").remove();
       $("[data-selector=listAppend]").append(html);
 
-      var $reData = {
+      $reData = {
         "depth1" : $("[name=depth1]").data("value"),
         "depth2" : $("[name=depth2]").data("value"),
         "positions" : $positions
       };
+      //console.log($reData)
 
       Map.AddMarker($reData)
     })
   },
 
   More : function(){
-    $("[name=page]").val(parseInt(formData.page) + 1);
-    formData = {
-      "depth1" : formData.depth1,
-      "depth2" : formData.depth2,
-      "depth3" : formData.depth3,
-      "page" : $("[name=page]").val()
-    }
-    console.log(formData)
-    Page.RenderData(formData);
+    var _tempUrl = window.location.search.substring(1),
+      _tempArray = _tempUrl.split('&');
+
+    var url = '?';
+    $.each(_tempArray, function(index, row){
+      console.log(_tempArray.length, index)
+      if(row.indexOf("page") > -1) {
+        url += "page="+ (parseInt($("[name=page]").val()) + 1) + (_tempArray.length - 1 > index ? "&" : '');
+      } else {
+        url += row + (_tempArray.length > index ? "&" : '');
+      }
+    })
+    console.log()
+    location.href=url;
   },
 
   RenderMap : function(add){
@@ -167,6 +217,12 @@ var Page = {
       };
       map = new kakao.maps.Map(mapContainer, mapOption);
     })
+  },
+
+  Clipboard : function(){
+    console.log(location.href)
+    $("[data-action=clipboard]").attr("data-clipboard-text", "");
+
   },
 
   Bind: function () {
@@ -215,7 +271,7 @@ var Map = {
     })
   },
 
-  /*AddMarker : function(data){
+  AddMarker : function(data){
     Map.CurrentLocation((data.depth1 + (data.depth2 ? ' '+ data.depth2 : "")), function(res) {
       $("#map").remove();
       $("[data-selector=mapContainer]").html("<div id=map></div>");
@@ -230,7 +286,7 @@ var Map = {
         center = map.getCenter(),
         level = map.getLevel();
 
-      /!*클러스터로*!/
+      /*클러스터로*/
       var clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -256,10 +312,38 @@ var Map = {
         console.log(clusterer)
       });
     })
-  },*/
+  },
 
-  AddMarker : function(data){
-    $.each(data.positions, function (index, row) {
+  /*AddMarker : function(data){
+    /!* 클러스터로 *!/
+    var clusterer = new kakao.maps.MarkerClusterer({
+      map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+      averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+      minLevel: 1, // 클러스터 할 최소 지도 레벨
+      disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
+    });
+
+    console.log(data.positions, data.coards)
+    var markers = $(data.coards).map(function(i, position) {
+      console.log(i, position)
+      return new kakao.maps.Marker({
+        position : new kakao.maps.LatLng(position.lat, position.lng)
+      });
+    });
+
+    // 클러스터러에 마커들을 추가합니다
+    clusterer.addMarkers(markers);
+
+    /!*kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+      // 현재 지도 레벨에서 1레벨 확대한 레벨
+      var level = map.getLevel()-1;
+      // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
+      map.setLevel(level, {anchor: cluster.getCenter()});
+
+      console.log(clusterer)
+    });*!/
+
+    /!*$.each(data.positions, function (index, row) {
       // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
       selectedMarker = null; // 클릭한 마커를 담을 변수
       imageSrc = "https://static.econtents.co.kr/_img/onnuri/marker"+ row.business +".webp"; // 마커이미지의 주소입니다
@@ -285,33 +369,33 @@ var Map = {
 
         marker.setMap(map);
 
-        /*var content = '<div class="customoverlay">';
+        /!*var content = '<div class="customoverlay">';
         content += '  <a href="' + place + '" target="_blank">';
         content += '    <span class="strore">' + row.store + '</span>';
         content += '  </a>';
-        content += '</div>';*/
+        content += '</div>';*!/
 
-        /*var customOverlay = new kakao.maps.CustomOverlay({
+        /!*var customOverlay = new kakao.maps.CustomOverlay({
           position: coords,
           content: content
-        });*/
+        });*!/
 
-        /*kakao.maps.event.addListener(marker, 'mouseover', function () {
+        /!*kakao.maps.event.addListener(marker, 'mouseover', function () {
           if (!selectedMarker || selectedMarker !== marker) {
             marker.setImage(overImage);
             //infowindow.open(map, marker);
           }
-        });*/
+        });*!/
 
         // 마커에 mouseout 이벤트를 등록합니다
-        /*kakao.maps.event.addListener(marker, 'mouseout', function () {
+        /!*kakao.maps.event.addListener(marker, 'mouseout', function () {
           if (!selectedMarker || selectedMarker !== marker) {
             marker.setImage(markerImage);
             //infowindow.close();
           }
-        });*/
+        });*!/
 
-        /*kakao.maps.event.addListener(marker, 'click', function () {
+        /!*kakao.maps.event.addListener(marker, 'click', function () {
           if (!selectedMarker || selectedMarker !== marker) {
 
             // 클릭된 마커 객체가 null이 아니면
@@ -331,12 +415,12 @@ var Map = {
 
           // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
           selectedMarker = marker;
-        });*/
+        });*!/
       })
-    });
+    });*!/
 
 
-    /*Map.SearchAddrFromCoords(center, function(res) {
+    /!*Map.SearchAddrFromCoords(center, function(res) {
       var depth1 = res[0].region_1depth_name,
         depth2 = level > 7 ? '' : res[0].region_2depth_name,
         depth3 = level > 7 ? '' : res[0].region_3depth_name;
@@ -351,6 +435,7 @@ var Map = {
       clusterer.addMarkers(markers);
 
 
-    })*/
-  },
+    })*!/
+  }*/
 }
+
