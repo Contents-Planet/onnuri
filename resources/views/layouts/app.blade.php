@@ -31,8 +31,6 @@
   <link rel="stylesheet" href="/assets/css/style.css?v=20230921" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/jquery.datetimepicker.min.css" type="text/css"/>
 
-
-
   <script src="https://static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="/assets/js/ND.function.js"></script>
   <script src="/assets/js/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
@@ -42,8 +40,6 @@
   <script src="/assets/js/ND.function.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
 
-
-  -=--
   <script src="https://static.econtents.co.kr/_asset/_lib/ckeditor5-39.0.1/build/ckeditor.js"></script>
   <script src="/assets/js/UploadAdapter.js"></script>
   <script src="/assets/js/vendor.min.js"></script>
@@ -63,8 +59,6 @@
   <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/abpetkov-powerange/dist/powerange.min.js"></script>
   <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/clipboard/dist/clipboard.min.js"></script>
   <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/dropzone/dist/min/dropzone.min.js"></script>
-  ---
-
 
 </head>
 

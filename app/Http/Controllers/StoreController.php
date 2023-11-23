@@ -19,7 +19,6 @@ class StoreController extends Controller
 
   public function list(Request $request)
   {
-
     $data = [];
     return view('store.list')->with($data);
   }
@@ -63,17 +62,20 @@ class StoreController extends Controller
     $industry_code = config("city_name.industry_code");
     $depth2Index = $request->input('depth2')-1;
     $depthDec = $depth2CityArray[$depth2Index]['dec'];
-
+    $depth3 = $request->input('depth3');
     $page = $request->input('page') ?? 1;
     $pageLimit = 10;
     $offsetNum = ($page-1) * $pageLimit;
 
     $stores = Store::where("addres_code",$request->depth1)
             ->where("addres_depth_2",$depthDec)
-            ->where("industry_code",$industry_code[$request->depth3])
-            ->offset($offsetNum)
-            ->limit($pageLimit)
-            ;
+            ->where(function ($query) use ($depth3,$industry_code) {
+              for($i=0;$i<count($depth3);$i++){
+                $query->orWhere('industry_code', $industry_code[$depth3[$i]]);
+              }
+            });
+
+    $stores->offset($offsetNum)->limit($pageLimit);
 
     $data = [];
 

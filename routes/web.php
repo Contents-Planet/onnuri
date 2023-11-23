@@ -33,6 +33,6 @@ Route::prefix('/management')->group(function () {
   Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
   Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
   Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [StoreController::class, 'index'])->name('store');
+    Route::get('/', [ManageMentController::class, 'index'])->name('store');
   });
 });
