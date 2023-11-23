@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ManageMentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,5 +26,13 @@ Route::prefix('/store')->group(function () {
     Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
     Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
     Route::get('/getStoreList', [StoreController::class, 'getStoreList'])->name('store.list');
+});
 
+
+Route::prefix('/management')->group(function () {
+  Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
+  Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+  Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [StoreController::class, 'index'])->name('store');
+  });
 });

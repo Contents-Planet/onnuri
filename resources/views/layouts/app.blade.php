@@ -20,15 +20,52 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="https://static.econtents.co.kr/_img/onnuri/favicon_v2.png"/>
 
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css" type="text/css"/>
+  <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/color_admin/bootstrap-timepicker/css/bootstrap-timepicker.min.css" type="text/css"/>
+  <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/color_admin/abpetkov-powerange/dist/powerange.min.css" type="text/css"/>
+  <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/color_admin/dropzone/dist/min/dropzone.min.css" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/vendor.min.css" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/default/app.min.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/common.css?v=20230921" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/style.css?v=20230921" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/jquery.datetimepicker.min.css" type="text/css"/>
 
+
+
+  <script src="https://static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
+  <script src="/assets/js/ND.function.js"></script>
+  <script src="/assets/js/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/cssua.min.js"></script>
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-images-loaded.min.js"></script>
   <script src="/assets/js/ND.function.js"></script>
-  {{--<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID"></script>--}}
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
+
+
+  -=--
+  <script src="https://static.econtents.co.kr/_asset/_lib/ckeditor5-39.0.1/build/ckeditor.js"></script>
+  <script src="/assets/js/UploadAdapter.js"></script>
+  <script src="/assets/js/vendor.min.js"></script>
+  <script src="/assets/js/app.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/jquery.datetimepicker.full.min.js"></script>
+  <!-- ================== END core-js ================== -->
+
+  <!-- ================== BEGIN page-js ================== -->
+  <script src="https://static.econtents.co.kr/_asset/_lib/moment.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/bootstrap-datepicker-master/dist/locales/bootstrap-datepicker.ko.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/parsleyjs/dist/parsley.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/abpetkov-powerange/dist/powerange.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/clipboard/dist/clipboard.min.js"></script>
+  <script src="https://static.econtents.co.kr/_asset/_lib/color_admin/dropzone/dist/min/dropzone.min.js"></script>
+  ---
+
+
 </head>
 
 <body>
