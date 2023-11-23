@@ -63,9 +63,9 @@ class StoreController extends OnnuriController
     $depth2Index = $request->input('depth2')-1;
     $depthDec = $depth2CityArray[$depth2Index]['dec'];
     $depth3 = $request->input('depth3');
-    $page = $request->input('page') ?? 1;
+    $page = (int)$request->input('page') ?? 1;
     $pageLimit = 10;
-    $offsetNum = ($page-1) * $pageLimit;
+    $offsetNum = ($page - 1) * $pageLimit;
 
     $stores = Store::where("addres_code",$request->depth1)
             ->where("addres_depth_2",$depthDec)
@@ -74,6 +74,8 @@ class StoreController extends OnnuriController
                 $query->orWhere('industry_code', $industry_code[$depth3[$i]]);
               }
             });
+
+    $totalCount = $stores->count();
 
     $stores->offset($offsetNum)->limit($pageLimit);
 
@@ -90,14 +92,16 @@ class StoreController extends OnnuriController
     }
 
     $returnArray = [
-      "totalCount" => $stores->count(),
-      "totalPage" => ceil($stores->count() / 20),
+      "totalCount" => $totalCount,
+      "totalPage" => ceil($totalCount / $pageLimit),
       "page" => $page,
       "listNum" => $pageLimit,
       "data" => $data,
     ];
 
     return json_encode($returnArray);
+    // return $stores;
+
   }
 
   public function findStore(Request $request)
