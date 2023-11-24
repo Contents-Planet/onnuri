@@ -316,12 +316,50 @@ var Map = {
           imageOption = {offset: new kakao.maps.Point(18, 44)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
           markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 
-        return new kakao.maps.Marker({
+        console.log(position.tit)
+
+        var marker = new kakao.maps.Marker({
           position : new kakao.maps.LatLng(position.lat, position.lng),
           title : position.tit,
           clickable : true,
           image: markerImage
         });
+
+        /*customoverlay Todo*/
+        var content = '<div class="customoverlay">';
+        content += '  <a href="" target="_blank">';
+        content += '    <span class="strore">'+ position.tit +'</span>';
+        content += '  </a>';
+        content += '</div>';
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+          position: new kakao.maps.LatLng(position.lat, position.lng),
+          content: content
+        });
+
+        kakao.maps.event.addListener(marker, 'click', function() {
+          if (!selectedMarker || selectedMarker !== marker) {
+
+            // 클릭된 마커 객체가 null이 아니면
+            // 클릭된 마커의 이미지를 기본 이미지로 변경하고
+            !!selectedMarker && selectedMarker.setImage(markerImage);
+
+            marker.setImage(markerImage);
+            //window.open(place, '', '');
+
+          }
+
+          if (clickedOverlay) {
+            clickedOverlay.setMap(null);
+          }
+          customOverlay.setMap(map);
+          clickedOverlay = customOverlay;
+
+          // 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
+          selectedMarker = marker;
+        });
+
+        return marker
       });
 
       // 클러스터러에 마커들을 추가합니다
@@ -332,7 +370,6 @@ var Map = {
         var level = map.getLevel()-1;
         // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
         map.setLevel(level, {anchor: cluster.getCenter()});
-
         console.log(clusterer)
       });
 
