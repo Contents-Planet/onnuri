@@ -5,11 +5,13 @@
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <h4 class="panel-title">List</h4>
-      <div class="panel-heading-btn">
-        <a class="btn btn-gray btn-sm" href="#"><i class="fas fa-file-excel" aria-hidden="true"></i> ExcelDownLoad</a>
-        <a class="btn btn-gray btn-sm" href="#"><i class="fas fa-file-excel" aria-hidden="true"></i> ExcelUpLoad</a>
-        <a href="javascript:void(0);" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand" data-tooltip-init="true"><i class="fa fa-expand"></i></a>
-      </div>
+      <form enctype="multipart/form-data" id='excelForm' action="{{ route('excel.upload') }}" method="post">
+        {{ csrf_field() }}
+        <div class="panel-heading-btn">
+          <input type='file' id='excelFile' name='excelFile'>
+          <button type='button' onclick="doExcel()" class="btn btn-gray btn-sm"><i class="fas fa-file-excel" aria-hidden="true"></i> excel upload</button>
+        </div>
+      </form>
     </div>
     <div class="panel-body">
       <table class="table">
@@ -50,4 +52,29 @@
       {!!$paga_nation!!}
     </div>
   </div>
+
 @endsection
+@push('js')
+  <script>
+    function doExcel(){
+      var excelFile = $('#excelFile').val();
+      var fileForm = /(.*?)\.(xlsx|Xlsx)$/;
+
+
+      if($('#excelFile').val() == "") {
+        alert("엑셀파일을 선택해주세요.");
+          $("#excelFile").focus();
+          return false;
+      }
+
+      if(excelFile != "" && excelFile != null) {
+          if(!excelFile.match(fileForm)) {
+            alert("엑셀 파일만 업로드 가능");
+              return false;
+          }
+      }
+
+      $("#excelForm").submit();
+    }
+  </script>
+@endpush

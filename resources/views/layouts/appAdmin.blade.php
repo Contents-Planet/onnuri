@@ -49,7 +49,7 @@
     @endif
 
     <div id="app" class="app app-header-fixed app-sidebar-fixed">
-      {{-- @include('management.navbars.topnav') --}}
+      @include('management.navbars.topnav')
       @include('management.navbars.sidenav')
       <div id="content" class="app-content">
         <header class="top-header">

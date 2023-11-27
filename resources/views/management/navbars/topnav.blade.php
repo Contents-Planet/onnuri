@@ -30,8 +30,8 @@
         <span class="d-none d-md-inline">{{$memberInfo['name']}}</span> <b class="caret ms-6px"></b>
       </a>
       <div class="dropdown-menu dropdown-menu-end me-1">
-        <a href="#" class="dropdown-item">Edit Profile</a>
-        <div class="dropdown-divider"></div>
+        {{-- <a href="#" class="dropdown-item">Edit Profile</a> --}}
+        {{-- <div class="dropdown-divider"></div> --}}
         <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
           @csrf
           <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">Log Out</a>

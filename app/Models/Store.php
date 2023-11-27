@@ -25,7 +25,6 @@ class Store extends Model
       "addres",
       "addres_depth_1",
       "addres_depth_2",
-      "addres_depth_3",
       "addres_depth_detail",
       "emoji_code",
     ];
