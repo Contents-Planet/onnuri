@@ -58,7 +58,7 @@ $(function(){
 
   var clipboard = new Clipboard('#copy');
   clipboard.on('success', function(e) {
-    alert("텍스트 복사가 완료되었습니다.");
+    alert("URL 복사가 완료되었습니다.\n다른곳에 붙여넣으세요");
   });
 
   clipboard.on('error', function(e) {
