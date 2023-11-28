@@ -64,6 +64,13 @@ figure img {display:block; margin:0 auto;}
 .btn-drop.search {border:none !important; background:#FE5521 !important;color:#fff !important;  font-size:50px;}
 .btn-drop.search:before {display:none !important;}
 
+.label-flex > li.all {width:100% !important; display:flex; justify-content:flex-end; padding:20px 0;}
+.label-flex > li.all .label-wrap {display:inline-block;width:auto;}
+.label-flex > li.all .label-wrap .txt {position:relative; white-space:nowrap; padding-left:30px; color:#5E5E5E; font-size:16px;}
+.label-flex > li.all .label-wrap :checked + .txt {color:#FE5521; font-weight:500;}
+.label-flex > li.all .label-wrap .txt:before {content:""; display:block; width:20px; height:20px; background:url(https://static.econtents.co.kr/_img/onnuri/ico_chk2.webp) center no-repeat; background-size:cover; position:absolute; left:0; top:50%; transform:translate(0, -50%); z-index:1;}
+.label-flex > li.all .label-wrap :checked + .txt:before {background-image:url(https://static.econtents.co.kr/_img/onnuri/ico_chk.webp)}
+
 .label-wrap._disable:after {content:""; display:block;width:100%; height:100%; background:rgba(255, 255, 255, 0.9);position:absolute; left:0; top:0;}
 .label-wrap.type-icon .txt,
 .btn-more .txt,

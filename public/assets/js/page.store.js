@@ -49,6 +49,7 @@ var Page = {
         dec2 : dec2
       }
 
+      console.log(depth)
     API.GetData(formData, 'getCityNames',function(res){
       if(step === "1" && val === "5") {
         $("[data-selector=dropContainer][data-sid=depth2]").hide();
@@ -72,11 +73,18 @@ var Page = {
 
         var max = res.length - 1;
         var liCount = 0;
+        html = ' <li class="all">';
+        html += '   <div class="label-wrap checkbox" >';
+        html += '     <input type="checkbox" name="all" id="all" data-action="chkAll" checked/>';
+        html += '     <label class="txt" for="all">전체선택</label>';
+        html += '   </div>';
+        html += ' </li>';
+
         $.each(res, function(index, row){
 
           html += ' <li '+ (liCount > 18 ? 'class="hide" data-selector="hide"' : '') +'>';
           html += '   <div class="label-wrap type-icon checkbox '+ (row.isActive == 0 ? '_disable' : '') +'" >';
-          html += '     <input type="checkbox" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="chk" '+ (row.isActive === 0 ? 'disable' : '') +'/>';
+          html += '     <input type="checkbox" name="'+ depth +'" value="'+ row.seq +'" id="'+ depth +'_'+ row.seq +'" data-value="'+ row.dec +'" data-action="chk" '+ (row.isActive == 0 ? 'disabled' : 'checked') +'/>';
           html += '     <label class="txt" for="'+ depth +'_'+ row.seq +'" style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.class +'_v2.webp)">'+ row.dec +'</label>';
           html += '   </div>';
           html += ' </li>';
@@ -108,6 +116,14 @@ var Page = {
 
       $("[data-selector=area]").html(formData.dec1 + (formData.dec2 ? " > "+ formData.dec2 : ""));
     });
+  },
+
+  ChkAll : function(){
+    if($("[data-action=chkAll]").prop("checked")) {
+      $('[name=depth3]:not(":disabled")').prop("checked", true);
+    } else {
+      $("[name=depth3]").prop("checked", false);
+    }
   },
 
   More: function (e) {
@@ -168,6 +184,11 @@ var Page = {
     $("[data-action=chk]").unbind("change");
     $(document).on("change", "[data-action=chk]", function () {
       Page.ActiveSearch();
+    })
+
+    $("[data-action=chkAll]").unbind("change");
+    $(document).on("change", "[data-action=chkAll]", function () {
+      Page.ChkAll();
     })
 
     $("[data-action=more]").unbind("click");
