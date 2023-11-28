@@ -58,7 +58,7 @@
   <script>
     function doExcel(){
       var excelFile = $('#excelFile').val();
-      var fileForm = /(.*?)\.(xlsx|Xlsx)$/;
+      var fileForm = /(.*?)\.(xlsx|xlsb)$/;
 
 
       if($('#excelFile').val() == "") {
