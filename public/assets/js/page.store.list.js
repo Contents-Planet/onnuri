@@ -375,9 +375,9 @@ var Map = {
         var level = map.getLevel()-1;
         // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
         map.setLevel(level, {anchor: cluster.getCenter()});
+        $('[data-selector=dataItem]').removeClass("_active");
 
         if(level < 1) {
-          $('[data-selector=dataItem]').removeClass("_active");
           $.each(cluster._markers, function(index, row){
             $('[data-tit="'+ row.Gb +'"]').addClass("_active");
           })
