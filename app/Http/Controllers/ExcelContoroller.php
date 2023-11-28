@@ -14,8 +14,6 @@ class ExcelContoroller extends Controller
   public function excelToData(Request $request)
   {
 
-    // post_max_size = 40M
-    // upload_max_filesize = 40M
     try {
       ini_set('memory_limit','500M');
       ini_set('upload_max_filesize', '30M');
@@ -28,8 +26,6 @@ class ExcelContoroller extends Controller
 
       array_shift($excelArray);
       $inputCount = 0;
-
-      $excelRowCount = substr(count($excelArray),-1,3);
 
       foreach ($excelArray as $excelRow) {
         $inputCount++;

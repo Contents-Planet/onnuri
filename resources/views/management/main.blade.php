@@ -9,7 +9,7 @@
         {{ csrf_field() }}
         <div class="panel-heading-btn">
           <input type='file' id='excelFile' name='excelFile'>
-          <button type='button' onclick="doExcel()" class="btn btn-gray btn-sm"><i class="fas fa-file-excel" aria-hidden="true"></i> excel upload</button>
+          {{-- <button type='button' onclick="doExcel()" class="btn btn-gray btn-sm"><i class="fas fa-file-excel" aria-hidden="true"></i> excel upload</button> --}}
         </div>
       </form>
     </div>
