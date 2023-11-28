@@ -1,0 +1,15 @@
+tap "homebrew/bundle"
+tap "homebrew/services"
+brew "autojump"
+brew "composer"
+brew "docker"
+brew "git"
+brew "node"
+brew "jupyterlab"
+brew "mysql", restart_service: true
+brew "nginx"
+brew "php@8.2", restart_service: true, link: true
+brew "python@3.10"
+brew "virtualenv"
+brew "zsh"
+brew "zsh-autosuggestions"
