@@ -49,8 +49,9 @@ var Page = {
         dec2 : dec2
       }
 
-      console.log(depth)
+    console.log(formData)
     API.GetData(formData, 'getCityNames',function(res){
+      console.log(formData, res)
       if(step === "1" && val === "5") {
         $("[data-selector=dropContainer][data-sid=depth2]").hide();
       } else {
@@ -100,6 +101,7 @@ var Page = {
           }
           liCount++;
         })
+        $("[data-selector=searchContainer]").removeClass("_disable");
       }
 
       var $container = $("[data-selector=selectDrop]"),
@@ -121,8 +123,10 @@ var Page = {
   ChkAll : function(){
     if($("[data-action=chkAll]").prop("checked")) {
       $('[name=depth3]:not(":disabled")').prop("checked", true);
+      $("[data-selector=searchContainer]").removeClass("_disable");
     } else {
       $("[name=depth3]").prop("checked", false);
+      $("[data-selector=searchContainer]").addClass("_disable");
     }
   },
 
@@ -142,6 +146,10 @@ var Page = {
       $("[data-selector=searchContainer]").removeClass("_disable");
     } else {
       $("[data-selector=searchContainer]").addClass("_disable");
+    }
+
+    if($('[data-action=chk]:not(":disabled")').length != $("[data-action=chk]:checked").length) {
+      $("[data-action=chkAll]").prop("checked", false);
     }
   },
 

@@ -92,7 +92,13 @@ var Page = {
             })
             $("[data-selector=area]").html(depth1 + (depth2 ? " > "+ depth2 : ""));
 
-            API.GetData({"depth" : "depth3"}, 'getCityNames', function(res) {
+            var depth3Data = {
+              "dec1" : formData.depth1,
+              "dec2" : formData.depth2,
+              "depth" : "depth3"
+            }
+            API.GetData(depth3Data, 'getCityNames', function(res) {
+
               $.each(res, function(index, row){
                 if(row.seq === formData.depth3[0]) {
                   $("[data-selector=business]").html(row.dec + (formData.depth3.length > 1 ? "외 " + (formData.depth3.length - 1) + "건" : ''));
@@ -154,12 +160,10 @@ var Page = {
         $positions.push(jsonObj);
       })
 
-      console.log($positions)
-
       setTimeout(function(){
         var pin = 0;
         $.each($positions, function(index, row) {
-          html += ' <li class="data-item" data-selector="dataItem">';
+          html += ' <li class="data-item" data-selector="dataItem" data-la="'+ row.lng +'" data-ma="'+ row.lat +'">';
           html += '   <dl class="data-flex flex">';
           html += '     <dt class="flex">';
           html += '       <div class="col-ico">';
@@ -168,6 +172,7 @@ var Page = {
           html += '       <div class="col-dec">';
           html += '         <strong class="tit">'+ row.tit +'</strong>';
           html += '         <p class="add">'+ row.add +'</p>';
+          html += '         <p class="add">La : '+ row.lng +' / Ma : '+ row.lat +'</p>';
           html += '       </div>';
           html += '     </dt>';
           html += '     <dd>';
@@ -316,20 +321,19 @@ var Map = {
           imageOption = {offset: new kakao.maps.Point(18, 44)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
           markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
 
-        console.log(position.tit)
-
         var marker = new kakao.maps.Marker({
           position : new kakao.maps.LatLng(position.lat, position.lng),
           title : position.tit,
           clickable : true,
-          image: markerImage
+          image: markerImage,
         });
+        marker.id = position.seq
 
         /*customoverlay Todo*/
         var content = '<div class="customoverlay">';
-        content += '  <a href="" target="_blank">';
-        content += '    <span class="strore">'+ position.tit +'</span>';
-        content += '  </a>';
+        content += '  <span href="javascript:void(0)" data-action="">';
+        content += '    <span class="strore">'+ position.tit +' / '+ position.seq +'</span>';
+        content += '  </span>';
         content += '</div>';
 
         var customOverlay = new kakao.maps.CustomOverlay({
@@ -338,15 +342,15 @@ var Map = {
         });
 
         kakao.maps.event.addListener(marker, 'click', function() {
-          if (!selectedMarker || selectedMarker !== marker) {
+          console.log(marker);
 
+          if (!selectedMarker || selectedMarker !== marker) {
             // 클릭된 마커 객체가 null이 아니면
             // 클릭된 마커의 이미지를 기본 이미지로 변경하고
             !!selectedMarker && selectedMarker.setImage(markerImage);
 
             marker.setImage(markerImage);
             //window.open(place, '', '');
-
           }
 
           if (clickedOverlay) {
@@ -366,11 +370,21 @@ var Map = {
       clusterer.addMarkers(markers);
 
       kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
+        console.log( cluster.getClusterMarker() );
+
+        /*console.log( cluster.getCenter().La, cluster.getCenter().Ma );
+        $.each($('[data-selector=dataItem]'), function(index, row){
+          console.log($(row).data("la"), cluster.getCenter().La)
+          /!*if($(row).data("la") != cluster.getCenter().La) {
+            $(row).remove();
+          }*!/
+        })*/
+
+
         // 현재 지도 레벨에서 1레벨 확대한 레벨
         var level = map.getLevel()-1;
         // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
         map.setLevel(level, {anchor: cluster.getCenter()});
-        console.log(clusterer)
       });
 
       $("[data-action=mapMarker]").unbind("click");
