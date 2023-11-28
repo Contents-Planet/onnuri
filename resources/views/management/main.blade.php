@@ -2,7 +2,7 @@
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-{{ dd(phpinfo()); }}
+{{-- {{ dd(phpinfo()); }} --}}
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <h4 class="panel-title">List</h4>
