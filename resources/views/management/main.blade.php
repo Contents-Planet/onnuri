@@ -1,7 +1,11 @@
 @extends('layouts.appAdmin')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<<<<<<< HEAD
 {{ dd(phpinfo()); }}
+=======
+
+>>>>>>> origin
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <h4 class="panel-title">List</h4>
