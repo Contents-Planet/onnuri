@@ -1,15 +1,15 @@
-<?php $__env->startSection('content'); ?>
-<meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
+@extends('layouts.appAdmin')
+@section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <div class="panel panel-inverse">
     <div class="panel-heading">
       <h4 class="panel-title">List</h4>
-      <form enctype="multipart/form-data" id='excelForm' action="<?php echo e(route('excel.upload')); ?>" method="post">
-        <?php echo e(csrf_field()); ?>
-
+      <form enctype="multipart/form-data" id='excelForm' action="{{ route('excel.upload') }}" method="post">
+        {{ csrf_field() }}
         <div class="panel-heading-btn">
           <input type='file' id='excelFile' name='excelFile'>
-          
+          {{-- <button type='button' onclick="doExcel()" class="btn btn-gray btn-sm"><i class="fas fa-file-excel" aria-hidden="true"></i> excel upload</button> --}}
         </div>
       </form>
     </div>
@@ -36,26 +36,25 @@
           </tr>
         </thead>
         <tbody>
-          <?php $__currentLoopData = $store_data->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          @foreach ($store_data->get() as $list)
             <tr>
-              <td style='text-align:center;'><?php echo e($row_num--); ?></td>
-              <td style='text-align:center;'><?php echo e($list->business_number); ?></td>
-              <td style='text-align:center;'><?php echo e($list->industry_name); ?></td>
-              <td style='text-align:center;'><?php echo e($list->franchise_name); ?></td>
-              <td style='text-align:center;'><?php echo e($list->market_name); ?></td>
-              <td style='text-align:center;'><?php echo e($list->addres ." ". $list->addres_depth_detail); ?></td>
+              <td style='text-align:center;'>{{$row_num--;}}</td>
+              <td style='text-align:center;'>{{$list->business_number}}</td>
+              <td style='text-align:center;'>{{$list->industry_name}}</td>
+              <td style='text-align:center;'>{{$list->franchise_name}}</td>
+              <td style='text-align:center;'>{{$list->market_name}}</td>
+              <td style='text-align:center;'>{{$list->addres ." ". $list->addres_depth_detail}}</td>
               <td style='text-align:center;'><button>수정</button></td>
             </tr>
-          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+          @endforeach
         </tbody>
       </table>
-      <?php echo $paga_nation; ?>
-
+      {!!$paga_nation!!}
     </div>
   </div>
 
-<?php $__env->stopSection(); ?>
-<?php $__env->startPush('js'); ?>
+@endsection
+@push('js')
   <script>
     function doExcel(){
       var excelFile = $('#excelFile').val();
@@ -78,6 +77,4 @@
       $("#excelForm").submit();
     }
   </script>
-<?php $__env->stopPush(); ?>
-
-<?php echo $__env->make('layouts.appAdmin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/happyoley/develop/onnuri/resources/views/management/main.blade.php ENDPATH**/ ?>
+@endpush
