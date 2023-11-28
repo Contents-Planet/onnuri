@@ -163,16 +163,16 @@ var Page = {
       setTimeout(function(){
         var pin = 0;
         $.each($positions, function(index, row) {
-          html += ' <li class="data-item" data-selector="dataItem" data-la="'+ row.lng +'" data-ma="'+ row.lat +'">';
+          html += ' <li class="data-item" data-selector="dataItem" data-la="'+ row.lng +'" data-ma="'+ row.lat +'" data-tit="'+ row.tit +'" data-seq="'+ row.seq +'">';
           html += '   <dl class="data-flex flex">';
           html += '     <dt class="flex">';
           html += '       <div class="col-ico">';
           html += '         <span class="ico" style="background-image:url(https://static.econtents.co.kr/_img/onnuri/type'+ row.business +'_v2.webp)"></span>';
           html += '       </div>';
           html += '       <div class="col-dec">';
-          html += '         <strong class="tit">'+ row.tit +'</strong>';
+          html += '         <strong class="tit">'+ row.tit +' / '+ row.seq +'</strong>';
           html += '         <p class="add">'+ row.add +'</p>';
-          html += '         <p class="add">La : '+ row.lng +' / Ma : '+ row.lat +'</p>';
+          html += '         <p class="latlng">La : '+ row.lng +' / Ma : '+ row.lat +'</p>';
           html += '       </div>';
           html += '     </dt>';
           html += '     <dd>';
@@ -332,7 +332,7 @@ var Map = {
         /*customoverlay Todo*/
         var content = '<div class="customoverlay">';
         content += '  <span href="javascript:void(0)" data-action="">';
-        content += '    <span class="strore">'+ position.tit +' / '+ position.seq +'</span>';
+        content += '    <span class="strore">'+ position.tit +'</span>';
         content += '  </span>';
         content += '</div>';
 
@@ -342,7 +342,8 @@ var Map = {
         });
 
         kakao.maps.event.addListener(marker, 'click', function() {
-          console.log(marker);
+          $('[data-selector=dataItem]').removeClass("_active");
+          $('[data-tit="'+ marker.getTitle() +'"]').addClass("_active");
 
           if (!selectedMarker || selectedMarker !== marker) {
             // 클릭된 마커 객체가 null이 아니면
@@ -370,21 +371,18 @@ var Map = {
       clusterer.addMarkers(markers);
 
       kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
-        console.log( cluster.getClusterMarker() );
-
-        /*console.log( cluster.getCenter().La, cluster.getCenter().Ma );
-        $.each($('[data-selector=dataItem]'), function(index, row){
-          console.log($(row).data("la"), cluster.getCenter().La)
-          /!*if($(row).data("la") != cluster.getCenter().La) {
-            $(row).remove();
-          }*!/
-        })*/
-
-
         // 현재 지도 레벨에서 1레벨 확대한 레벨
         var level = map.getLevel()-1;
         // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
         map.setLevel(level, {anchor: cluster.getCenter()});
+
+        if(level < 1) {
+          $('[data-selector=dataItem]').removeClass("_active");
+          $.each(cluster._markers, function(index, row){
+            $('[data-tit="'+ row.Gb +'"]').addClass("_active");
+          })
+
+        }
       });
 
       $("[data-action=mapMarker]").unbind("click");
@@ -398,9 +396,7 @@ var Map = {
 
         $("[data-selector=listAppend] > li").removeClass("_active");
         $(this).closest("[data-selector=dataItem]").addClass("_active");
-        console.log(moveLatLon)
       })
-
     })
   }
 }
