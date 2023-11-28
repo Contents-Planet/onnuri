@@ -15,7 +15,6 @@ class StoreController extends OnnuriController
 
   public function index(Request $request)
   {
-
     $data = [];
 
     return view('store.main')->with($data);

@@ -14,19 +14,28 @@ class ExcelContoroller extends Controller
   public function excelToData(Request $request)
   {
 
+    // post_max_size = 40M
+    // upload_max_filesize = 40M
     try {
+      ini_set('memory_limit','500M');
+      ini_set('upload_max_filesize', '30M');
+
       $temp = $request->file('excelFile')->store('temp');
+      Store::truncate();
       $path = storage_path('app') . '/' . $temp;
 
       $excelArray = Excel::toArray(new ImportStore, $path)[0];
+
       array_shift($excelArray);
+      $inputCount = 0;
+
+      $excelRowCount = substr(count($excelArray),-1,3);
 
       foreach ($excelArray as $excelRow) {
-        Store::updateOrCreate(
+        $inputCount++;
+        $storeInputData[] =
           [
-            "business_number" => $excelRow[0]
-          ],
-          [
+            "business_number" => $excelRow[0],
             "franchise_name" => $excelRow[1] ?? null,
             "franchise_number" => $excelRow[2] ?? null,
             "industry_code" => $excelRow[3] ?? null,
@@ -39,9 +48,18 @@ class ExcelContoroller extends Controller
             "addres_depth_1" => $excelRow[10] ?? null,
             "addres_depth_2" => $excelRow[11] ?? null,
             "emoji_code" => $excelRow[12] ?? null,
-          ]
-        );
+          ];
+
+
+        if($inputCount == 1000){
+          Store::insert($storeInputData);
+          $inputCount = 0;
+          $storeInputData = array();
+        }
       }
+
+      Store::insert($storeInputData);
+
       return redirect()->route('management.mian');
     } catch (Exception $e) {
 
