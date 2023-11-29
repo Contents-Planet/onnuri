@@ -15,6 +15,51 @@
       </form>
     </div>
     <div class="panel-body">
+      <form id='search_form' action="{{ route('onnuri.search') }}">
+        <input type='hidden' name='orderDirection' id='orderDirection' value="{{$data['search_array']['orderDirection'] ?? null}}">
+        <input type='hidden' name='orderField' id='orderField' value="{{$data['search_array']['orderField'] ?? null}}">
+        <div class="row">
+          <div class="col-xl-3 col-sm-6">
+            <label class="form-label" for="search_type">유형</label>
+            <select class="form-select" name='search_type' id="search_type">
+              <option value="">select</option>
+              @foreach ($data['issues_type'] as $key => $val)
+                <option value="{{$key}}" @isset($data['search_array']['type']) @if ($data['search_array']['type'] == $key) selected @endif @endisset>{{$val}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <label class="form-label" for="search_state">상태</label>
+            <select class="form-select" name='search_state' id="search_state">
+              <option value="">select</option>
+              @foreach ($data['issues_state'] as $key => $val)
+                <option value="{{$key}}" @isset($data['search_array']['state']) @if ($data['search_array']['state'] == $key) selected @endif @endisset>{{$val}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-xl-3 col-sm-6">
+            <label class="form-label" for="search_handler">담당자</label>
+            <select class="form-select" name="search_handler" id="search_handler">
+              <option value="">select</option>
+              @foreach ($data['issues_member'] as $key => $val)
+                <option value="{{$key}}" @isset($data['search_array']['handler']) @if ($data['search_array']['handler'] == $key) selected @endif @endisset>{{$val}}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class="col-xl-3 col-sm-6">
+            <label class="form-label" for="">제목</label>
+            <input class="form-control" />
+          </div>
+        </div>
+        <hr>
+        <ul class="btn-right">
+          <li><a href="javascript:void(0)" class="btn btn-success" onclick="document.getElementById('search_form').submit();">검색</a></li>
+          <li><a href="/main" class="btn btn-gray">초기화</a></li>
+        </ul>
+      </form>
+    </div>
+    <div class="panel-body">
       <table class="table">
         <colgroup>
           <col style="width:50px">
