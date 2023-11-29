@@ -37,14 +37,14 @@ Route::prefix('/management')->group(function () {
 
   Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
   Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
   Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/detail/{seq?}', [ManageMentController::class, 'detail'])->name('management.detail');
     Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
     Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');
-
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
   });
 
 });
