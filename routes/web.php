@@ -19,28 +19,32 @@ use App\Http\Controllers\ExcelContoroller;
 */
 
 Route::get('/', function () {
-    return view('main');
+  return view('main');
 });
 
 Route::prefix('/store')->group(function () {
-    Route::get('/list', [StoreController::class, 'list'])->name('store.list');
-    Route::get('/', [StoreController::class, 'index'])->name('store');
-    Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
-    Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
-    Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
-
+  Route::get('/list', [StoreController::class, 'list'])->name('store.list');
+  Route::get('/', [StoreController::class, 'index'])->name('store');
+  Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
+  Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
+  Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
 });
 
-  Route::post('/excelUpload', [ExcelContoroller::class, 'excelToData'])->name('excel.upload');
-
+Route::post('/excelUpload', [ExcelContoroller::class, 'excelToData'])->middleware('auth')->name('excel.upload');
+Route::get('/excelDownload', [ExcelContoroller::class, 'dataToExcel'])->middleware('auth')->name('excel.download');
 
 Route::prefix('/management')->group(function () {
+
   Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
   Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
   Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/detail/{seq?}', [ManageMentController::class, 'detail'])->name('management.detail');
     Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');
 
   });
+
 });

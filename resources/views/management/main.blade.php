@@ -15,47 +15,50 @@
       </form>
     </div>
     <div class="panel-body">
-      <form id='search_form' action="{{ route('onnuri.search') }}">
+
+      <form id='search_form' action="{{ route('management.mian') }}">
         <input type='hidden' name='orderDirection' id='orderDirection' value="{{$data['search_array']['orderDirection'] ?? null}}">
         <input type='hidden' name='orderField' id='orderField' value="{{$data['search_array']['orderField'] ?? null}}">
         <div class="row">
           <div class="col-xl-3 col-sm-6">
-            <label class="form-label" for="search_type">유형</label>
-            <select class="form-select" name='search_type' id="search_type">
+            <label class="form-label" for="search_depth_1">시/도</label>
+            <select class="form-select" name='search_depth_1' id="search_depth_1">
               <option value="">select</option>
-              @foreach ($data['issues_type'] as $key => $val)
-                <option value="{{$key}}" @isset($data['search_array']['type']) @if ($data['search_array']['type'] == $key) selected @endif @endisset>{{$val}}</option>
+              @foreach ($addres_depth_1 as $val)
+                <option value="{{$val['seq']}}" @isset($search_depth_1) @if ($search_depth_1 == $val['seq']) selected @endif @endisset>{{$val['dec']}}</option>
               @endforeach
             </select>
           </div>
           <div class="col-xl-3 col-sm-6">
-            <label class="form-label" for="search_state">상태</label>
-            <select class="form-select" name='search_state' id="search_state">
+            <label class="form-label" for="search_depth_2">구/군</label>
+            <select class="form-select" name='search_depth_2' id="search_depth_2">
               <option value="">select</option>
-              @foreach ($data['issues_state'] as $key => $val)
-                <option value="{{$key}}" @isset($data['search_array']['state']) @if ($data['search_array']['state'] == $key) selected @endif @endisset>{{$val}}</option>
-              @endforeach
+              @isset($search_depth_options)
+                @foreach ($search_depth_options as $val)
+                  <option value="{{$val['dec']}}" @isset($search_depth_2) @if ($search_depth_2 == $val['dec']) selected @endif @endisset>{{$val['dec']}}</option>
+                @endforeach
+              @endisset
             </select>
           </div>
           <div class="col-xl-3 col-sm-6">
-            <label class="form-label" for="search_handler">담당자</label>
-            <select class="form-select" name="search_handler" id="search_handler">
+            <label class="form-label" for="search_type">검색 타입</label>
+            <select class="form-select" name="search_type" id="search_type">
               <option value="">select</option>
-              @foreach ($data['issues_member'] as $key => $val)
-                <option value="{{$key}}" @isset($data['search_array']['handler']) @if ($data['search_array']['handler'] == $key) selected @endif @endisset>{{$val}}</option>
-              @endforeach
+              <option value="market_name" @isset($search_type) @if ($search_type == "market_name") selected @endif @endisset>시장명</option>
+              <option value="franchise_name" @isset($search_type) @if ($search_type == "franchise_name") selected @endif @endisset>상점명</option>
             </select>
           </div>
 
           <div class="col-xl-3 col-sm-6">
-            <label class="form-label" for="">제목</label>
-            <input class="form-control" />
+            <label class="form-label" for="">키워드</label>
+            <input class="form-control" name="search_keyword" value="{{$search_keyword ?? null}}"/>
           </div>
         </div>
         <hr>
         <ul class="btn-right">
-          <li><a href="javascript:void(0)" class="btn btn-success" onclick="document.getElementById('search_form').submit();">검색</a></li>
-          <li><a href="/main" class="btn btn-gray">초기화</a></li>
+          <li><a href="javascript:void(0)" class="btn btn-gray" onclick="document.getElementById('search_form').submit();">검색</a></li>
+          <li><a href="/management" class="btn btn-danger">초기화</a></li>
+          <li><a class="btn btn-success" style='background-color:#008C8C; color:#fff;' onclick="excelDown();"><i class="fas fa-file-excel" aria-hidden="true"></i> Excel Download</a></li>
         </ul>
       </form>
     </div>
@@ -75,7 +78,7 @@
             <th>No</th>
             <th>사업자 NO.</th>
             <th>업종</th>
-            <th>이름</th>
+            <th>상점명</th>
             <th>시장명</th>
             <th>주소</th>
             <th>관리</th>
@@ -102,6 +105,30 @@
 @endsection
 @push('js')
   <script>
+
+    function excelDown(){
+      var form = document.getElementById('search_form');
+      form.action = "{{ route('excel.download') }}";
+      form.submit();
+    }
+
+    $("#search_depth_1").on("change",function(){
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: "{{ route('store.search_depth2') }}",
+        data: {
+          'seq': $("#search_depth_1").val(),
+        },
+        success: function(res) {
+          $("select[name='search_depth_2'] option").remove();
+          $('#search_depth_2').append(res);
+        }
+      });
+    });
+
     function doExcel(){
       var excelFile = $('#excelFile').val();
       var fileForm = /(.*?)\.(xlsx|xlsb)$/;

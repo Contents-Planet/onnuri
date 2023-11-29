@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ImportStore;
+use App\Exports\ExportStore;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -62,7 +63,20 @@ class ExcelContoroller extends Controller
     }
   }
 
-  public function loadingView()
+  public function dataToExcel(Request $request)
   {
+    ini_set('memory_limit','500M');
+    ini_set('upload_max_filesize', '30M');
+
+    $requestArray =[
+      'search_depth_1' => $request->input('search_depth_1'),
+      'search_depth_2' => $request->input('search_depth_2'),
+      'search_type' => $request->input("search_type"),
+      'search_keyword' => $request->input('search_keyword'),
+    ];
+
+    $xlsxTitle = "onnuri_".date("ymdHis");
+
+    return Excel::download(new ExportStore($requestArray), $xlsxTitle.'.xlsx');
   }
 }
