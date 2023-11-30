@@ -70,9 +70,9 @@
           <col style="width:80px">
           <col style="width:140px">
           <col style="width:150px">
-          <col style="width:400px">
+          <col />
           <col style="width:120px">
-          <col style="width:120px">
+          <col style="width:100px">
         </colgroup>
         <thead>
           <tr>
@@ -96,7 +96,10 @@
               <td style='text-align:center;'>{{$list->market_name}}</td>
               <td style='text-align:center;'>{{$list->addres ." ". $list->addres_depth_detail}}</td>
               <td style='text-align:center;'></td>
-              <td style='text-align:center;'><button class="btn btn-gray">수정</button></td>
+              <td style='text-align:center;'>
+                <button class="btn btn-gray">수정</button>
+                <button class="btn btn-danger">삭제</button>
+              </td>
             </tr>
           @endforeach
         </tbody>
