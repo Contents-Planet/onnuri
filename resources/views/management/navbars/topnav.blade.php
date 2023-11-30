@@ -24,9 +24,6 @@
   <div class="navbar-nav">
     <div class="navbar-item navbar-user dropdown">
       <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center profile" data-bs-toggle="dropdown">
-        <div class="pic-wrap">
-          <div class="img-box" style="background-image:url({{(!is_null($memberInfo['profile_img'])) ? ContentsPlanet::S3_OBJECT.$memberInfo['profile_img'] : "https://static.econtents.co.kr/_img/onnuri/admin/mem.webp"}})"></div>
-        </div>
         <span class="d-none d-md-inline">{{$memberInfo['name']}}</span> <b class="caret ms-6px"></b>
       </a>
       <div class="dropdown-menu dropdown-menu-end me-1">
