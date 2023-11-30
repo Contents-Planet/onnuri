@@ -97,7 +97,7 @@
               <td style='text-align:center;'><p class="dec">{{$list->addres ." ". $list->addres_depth_detail}}</p></td>
               <td style='text-align:center;'></td>
               <td style='text-align:center;'>
-                <button class="btn btn-gray">수정</button>
+                <button class="btn btn-gray" href="{{ route('management.detail',['seq' => $list->seq]) }}">수정</button>
                 <button class="btn btn-danger">삭제</button>
               </td>
             </tr>
@@ -113,9 +113,29 @@
   <script>
 
     function excelDown(){
-      var form = document.getElementById('search_form');
-      form.action = "{{ route('excel.download') }}";
-      form.submit();
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: "{{ route('excel.download') }}",
+        data: {
+          'search_depth_1' : $("#search_depth_1").val(),
+          'search_depth_2' : $("#search_depth_2").val(),
+          'search_type' : $("#search_type").val(),
+          'search_keyword' : $("#search_keyword").val(),
+        },
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function(response) {
+          var blob = new Blob([response]);
+          var link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+          link.download = "onnuri_store.xlsx";
+          link.click();
+        }
+      });
     }
 
     $("#search_depth_1").on("change",function(){
@@ -138,7 +158,6 @@
     function doExcel(){
       var excelFile = $('#excelFile').val();
       var fileForm = /(.*?)\.(xlsx|xlsb)$/;
-
 
       if($('#excelFile').val() == "") {
         alert("엑셀파일을 선택해주세요.");

@@ -31,7 +31,7 @@ Route::prefix('/store')->group(function () {
 });
 
 Route::post('/excelUpload', [ExcelContoroller::class, 'excelToData'])->middleware('auth')->name('excel.upload');
-Route::get('/excelDownload', [ExcelContoroller::class, 'dataToExcel'])->middleware('auth')->name('excel.download');
+Route::post('/excelDownload', [ExcelContoroller::class, 'dataToExcel'])->middleware('auth')->name('excel.download');
 
 Route::prefix('/management')->group(function () {
 

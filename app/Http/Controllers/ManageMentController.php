@@ -32,8 +32,8 @@ class ManageMentController extends OnnuriController
       $store_data->where("addres_depth_2", $request->input("search_depth_2"));
     }
 
-    if (!empty($request->input("search_type")) && !empty($request->input("search_keyword")) ) {
-      $store_data->where($request->input("search_type"),"LIKE",'%'.$request->input("search_keyword").'%');
+    if (!empty($request->input("search_type")) && !empty($request->input("search_keyword"))) {
+      $store_data->where($request->input("search_type"), "LIKE", '%' . $request->input("search_keyword") . '%');
     }
 
     $store_data->limit($limitPage)->orderBy('seq', 'desc');
@@ -68,7 +68,18 @@ class ManageMentController extends OnnuriController
     return $html;
   }
 
-  public function detail(Request $request){
-    return view('management.store.detail')->with(Store::find($request->seq)->first());
+  public function detail(Request $request)
+  {
+    $store_data = Store::find($request->seq)->first();
+    $depth2City = 'city_name.depth2.' . $store_data['addres_code'] . '' ?? null;
+
+    $data = [
+      "addres_depth" => config("city_name.depth1"),
+      "addres_depth_1" => $store_data['addres_code'] ?? null,
+      "addres_depth_2" => $store_data['addres_depth_2'] ?? null,
+      "search_depth_options" => config($depth2City) ?? null,
+      "store_data" => $store_data,
+    ];
+    return view('management.store.detail')->with($data);
   }
 }
