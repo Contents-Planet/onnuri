@@ -13,7 +13,6 @@
           <div class="menu-profile-cover with-shadow"></div>
           <div class="menu-profile-image">
             <div class="pic-wrap">
-
               <div class="img-box"></div>
             </div>
           </div>
