@@ -25,7 +25,6 @@
   <link rel="stylesheet" href="/assets/css/default/app.min.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/admin/common.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/admin/style.css" type="text/css"/>
-  <link rel="stylesheet" href="/assets/css/admin/admin.style.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/jquery.datetimepicker.min.css" type="text/css"/>
   <script src="https://static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="/assets/js/ND.function.js"></script>
