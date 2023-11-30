@@ -72,6 +72,7 @@
           <col style="width:150px">
           <col style="width:400px">
           <col style="width:120px">
+          <col style="width:120px">
         </colgroup>
         <thead>
           <tr>
@@ -81,6 +82,7 @@
             <th>상점명</th>
             <th>시장명</th>
             <th>주소</th>
+            <th>LatLng</th>
             <th>관리</th>
           </tr>
         </thead>
@@ -93,7 +95,8 @@
               <td style='text-align:center;'>{{$list->franchise_name}}</td>
               <td style='text-align:center;'>{{$list->market_name}}</td>
               <td style='text-align:center;'>{{$list->addres ." ". $list->addres_depth_detail}}</td>
-              <td style='text-align:center;'><button>수정</button></td>
+              <td style='text-align:center;'></td>
+              <td style='text-align:center;'><button class="btn btn-gray">수정</button></td>
             </tr>
           @endforeach
         </tbody>
