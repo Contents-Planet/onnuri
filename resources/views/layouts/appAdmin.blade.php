@@ -14,7 +14,7 @@
   <meta property="og:type" content="article"/>
   <meta property="og:site_name" content=""/>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?V=20221259">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://static.econtents/_img/onnuri/favicon.png">
 
   <!-- CSS Files -->
   <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css" type="text/css"/>
