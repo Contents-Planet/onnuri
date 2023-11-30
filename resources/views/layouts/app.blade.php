@@ -32,6 +32,16 @@
   <script src="/assets/js/ND.function.js"></script>
   <script src="/assets/js/page.common.js"></script>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
+
+
+  <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+  <script type="text/javascript">
+    if(!wcs_add) var wcs_add = {};
+    wcs_add["wa"] = "1ef6a96e2915730";
+    if(window.wcs) {
+      wcs_do();
+    }
+  </script>
 </head>
 
 <body>
