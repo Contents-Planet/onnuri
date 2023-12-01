@@ -36,8 +36,17 @@ class ManageMentController extends OnnuriController
       $store_data->where($request->input("search_type"), "LIKE", '%' . $request->input("search_keyword") . '%');
     }
 
+    if (!empty($request->input("search_latLng"))) {
+
+      if ($request->input("search_latLng") == "Y") {
+        $store_data->where("latitude","!=","null");
+      }else{
+        $store_data->where("latitude","null");
+      }
+    }
+
     $store_data->limit($limitPage)->orderBy('seq', 'desc');
-    // $this->getQuery($store_data);
+    $this->getQuery($store_data);
     $depth2City = 'city_name.depth2.' . $request->input("search_depth_1") . '' ?? null;
 
     $data = [
@@ -46,6 +55,7 @@ class ManageMentController extends OnnuriController
       "search_depth_2" => $request->input("search_depth_2") ?? null,
       "search_depth_options" => config($depth2City) ?? null,
       "search_type" => $request->input("search_type") ?? null,
+      "search_latLng" => $request->input("search_latLng") ?? null,
       "search_keyword" => $request->input("search_keyword") ?? null,
       "store_data" => $store_data,
       "row_num" => $this->getPageRowNumber($store_data->count(), $page, $limitPage) ?? null,

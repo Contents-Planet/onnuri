@@ -28,6 +28,8 @@ Route::prefix('/store')->group(function () {
   Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
   Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
   Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
+  Route::get('/testAddres', [StoreController::class, 'testAddres'])->name('store.testAddres');;
+
 });
 
 Route::post('/excelUpload', [ExcelContoroller::class, 'excelToData'])->middleware('auth')->name('excel.upload');
@@ -40,7 +42,6 @@ Route::prefix('/management')->group(function () {
 
 
   Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/detail/{seq?}', [ManageMentController::class, 'detail'])->name('management.detail');
     Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
     Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');

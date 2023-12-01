@@ -54,6 +54,15 @@ class ExportStore implements FromCollection
       $store_data->where($this->request["search_type"],"LIKE",'%'.$this->request["search_keyword"].'%');
     }
 
+    if (!empty($this->request->input("search_latLng"))) {
+
+      if ($this->request->input("search_latLng") == "Y") {
+        $store_data->where("latitude","!=","null");
+      }else{
+        $store_data->where("latitude","null");
+      }
+    }
+
     return $store_data->get();
   }
 

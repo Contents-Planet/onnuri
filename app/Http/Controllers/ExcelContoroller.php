@@ -16,23 +16,26 @@ class ExcelContoroller extends Controller
   {
 
     try {
-      ini_set('memory_limit','500M');
+      ini_set('memory_limit','2000M');
       ini_set('upload_max_filesize', '30M');
 
       $temp = $request->file('excelFile')->store('temp');
-      Store::truncate();
+
+
       $path = storage_path('app') . '/' . $temp;
 
       $excelArray = Excel::toArray(new ImportStore, $path)[0];
+
 
       array_shift($excelArray);
       $inputCount = 0;
 
       foreach ($excelArray as $excelRow) {
+
         $inputCount++;
         $storeInputData[] =
           [
-            "business_number" => $excelRow[0],
+            "business_number" => $excelRow[0] ?? null,
             "franchise_name" => $excelRow[1] ?? null,
             "franchise_number" => $excelRow[2] ?? null,
             "industry_code" => $excelRow[3] ?? null,
@@ -45,10 +48,13 @@ class ExcelContoroller extends Controller
             "addres_depth_1" => $excelRow[10] ?? null,
             "addres_depth_2" => $excelRow[11] ?? null,
             "emoji_code" => $excelRow[12] ?? null,
+            "latitude" => $excelRow[13] ?? null,
+            "longitude" => $excelRow[14] ?? null,
           ];
 
 
         if($inputCount == 1000){
+          // dd($storeInputData);
           Store::insert($storeInputData);
           $inputCount = 0;
           $storeInputData = array();
@@ -73,6 +79,7 @@ class ExcelContoroller extends Controller
       'search_depth_2' => $request->input('search_depth_2'),
       'search_type' => $request->input("search_type"),
       'search_keyword' => $request->input('search_keyword'),
+      'search_latLng' => $request->input('search_latLng'),
     ];
 
     $xlsxTitle = "onnuri_".date("ymdHis");

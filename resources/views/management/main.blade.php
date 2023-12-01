@@ -20,7 +20,7 @@
         <input type='hidden' name='orderDirection' id='orderDirection' value="{{$data['search_array']['orderDirection'] ?? null}}">
         <input type='hidden' name='orderField' id='orderField' value="{{$data['search_array']['orderField'] ?? null}}">
         <div class="row">
-          <div class="col-xl-3 col-sm-6">
+          <div class="col-xl-2 col-sm-6">
             <label class="form-label" for="search_depth_1">시/도</label>
             <select class="form-select" name='search_depth_1' id="search_depth_1">
               <option value="">select</option>
@@ -29,7 +29,7 @@
               @endforeach
             </select>
           </div>
-          <div class="col-xl-3 col-sm-6">
+          <div class="col-xl-2 col-sm-6">
             <label class="form-label" for="search_depth_2">구/군</label>
             <select class="form-select" name='search_depth_2' id="search_depth_2">
               <option value="">select</option>
@@ -40,6 +40,14 @@
               @endisset
             </select>
           </div>
+          <div class="col-xl-2 col-sm-6">
+            <label class="form-label" for="search_type">위도경도</label>
+            <select class="form-select" name="search_latLng" id="search_latLng">
+              <option value="">select</option>
+              <option value="Y" @isset($search_latLng) @if ($search_latLng == "Y") selected @endif @endisset>O</option>
+              <option value="N" @isset($search_latLng) @if ($search_latLng == "N") selected @endif @endisset>X</option>
+            </select>
+          </div>
           <div class="col-xl-3 col-sm-6">
             <label class="form-label" for="search_type">검색 타입</label>
             <select class="form-select" name="search_type" id="search_type">
@@ -48,7 +56,6 @@
               <option value="franchise_name" @isset($search_type) @if ($search_type == "franchise_name") selected @endif @endisset>상점명</option>
             </select>
           </div>
-
           <div class="col-xl-3 col-sm-6">
             <label class="form-label" for="">키워드</label>
             <input class="form-control" name="search_keyword" value="{{$search_keyword ?? null}}"/>
@@ -95,7 +102,7 @@
               <td style='text-align:center;'>{{$list->franchise_name}}</td>
               <td style='text-align:center;'>{{$list->market_name}}</td>
               <td style='text-align:center;'><p class="dec">{{$list->addres ." ". $list->addres_depth_detail}}</p></td>
-              <td style='text-align:center;'></td>
+              <td style='text-align:center;'>{{$list->latitude}} <br> {{$list->longitude}}</td>
               <td style='text-align:center;'>
                 <button class="btn btn-gray" href="{{ route('management.detail',['seq' => $list->seq]) }}">수정</button>
                 <button class="btn btn-danger">삭제</button>
@@ -108,10 +115,21 @@
     </div>
   </div>
 
+  {{-- <div>
+    <table class='testAddres'>
+      <tbody>
+
+      </tbody>
+    </table>
+
+  </div> --}}
+
 @endsection
 @push('js')
+{{-- <script src="/assets/js/page.store.js"></script> --}}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script>
-
     function excelDown(){
       $.ajax({
         headers: {
@@ -124,6 +142,7 @@
           'search_depth_2' : $("#search_depth_2").val(),
           'search_type' : $("#search_type").val(),
           'search_keyword' : $("#search_keyword").val(),
+          'search_latLng' : $("#search_latLng").val(),
         },
         xhrFields: {
             responseType: 'blob'
@@ -171,8 +190,42 @@
               return false;
           }
       }
-
       $("#excelForm").submit();
     }
+
+    // function testAddres(){
+    //   var geocoder = new kakao.maps.services.Geocoder();
+    //   $.ajax({
+    //     headers: {
+    //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     },
+    //     type: 'get',
+    //     dataType: 'json',
+    //     url: "{{ route('store.testAddres') }}",
+    //     data: {
+    //     },
+    //     success: function(res) {
+
+    //       $.each(res.data, function(index, row) {
+    //         var jsonObj = new Object();
+    //         var add,lat,lng;
+    //           add = row.add;
+    //           geocoder.addressSearch(row.add, function (result, status) {
+    //             // console.log(status);
+    //             if(status == "OK"){
+    //               $('.testAddres > tbody:last').append('<tr><td>'+row.seq+'</td><td>'+row.business_number+'</td><td>'+row.franchise_name+'</td><td>'+row.franchise_number+'</td><td>'+row.industry_code+'</td><td>'+row.industry_name+'</td><td>'+row.market_code+'</td><td>'+row.market_name+'</td><td>'+row.addres_code+'</td><td>'+row.addres+'</td><td>'+row.addres_depth_detail+'</td><td>'+row.emoji_code+'</td><td>'+row.addres_depth_1+'</td><td>'+row.addres_depth_2+'</td><td>'+result[0].x+'</td><td>'+result[0].y+'</td></tr>');
+    //             }else{
+    //               $('.testAddres > tbody:last').append('<tr><td>'+row.seq+'</td><td>'+row.business_number+'</td><td>'+row.franchise_name+'</td><td>'+row.franchise_number+'</td><td>'+row.industry_code+'</td><td>'+row.industry_name+'</td><td>'+row.market_code+'</td><td>'+row.market_name+'</td><td>'+row.addres_code+'</td><td>'+row.addres+'</td><td>'+row.addres_depth_detail+'</td><td>'+row.emoji_code+'</td><td>'+row.addres_depth_1+'</td><td>'+row.addres_depth_2+'</td><td>null</td><td>null</td></tr>');
+    //             }
+
+    //           });
+
+
+    //       })
+    //     }
+    //   });
+    // }
+
+    // testAddres();
   </script>
 @endpush

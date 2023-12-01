@@ -27,6 +27,8 @@ class Store extends Model
       "addres_depth_2",
       "addres_depth_detail",
       "emoji_code",
+      "latitude",
+      "longitude",
     ];
 
 }

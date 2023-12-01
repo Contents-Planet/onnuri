@@ -106,6 +106,37 @@ class StoreController extends OnnuriController
 
   }
 
+  public function testAddres(Request $request){
+    $stores = Store::whereNotNull('business_number')->offset(37000)->limit(1000)->orderBy('seq','asc');
+    $data = [];
+
+    foreach ($stores->get() as $list) {
+      $data[] = [
+        "seq" => $list->seq,
+        "business_number" => $list->business_number,
+        "franchise_name" => $list->franchise_name,
+        "franchise_number" => $list->franchise_number,
+        "industry_code" => $list->industry_code,
+        "industry_name" => $list->industry_name,
+        "market_code" => $list->market_code,
+        "market_name" => $list->market_name,
+        "addres_code" => $list->addres_code,
+        "addres" => $list->addres,
+        "addres_depth_detail" => $list->addres_depth_detail,
+        "emoji_code" => $list->emoji_code,
+        "addres_depth_1" => $list->addres_depth_1,
+        "addres_depth_2" => $list->addres_depth_2,
+        "add" => $list->addres . " " . $list->addres_depth_detail ?? '',
+      ];
+    }
+
+    $returnArray = [
+      "data" => $data,
+    ];
+
+    return json_encode($returnArray);
+  }
+
   public function findStore(Request $request)
   {
     exit;
