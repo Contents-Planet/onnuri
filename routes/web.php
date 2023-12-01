@@ -43,6 +43,7 @@ Route::prefix('/management')->group(function () {
 
   Route::group(['middleware' => 'auth'], function () {
     Route::get('/detail/{seq?}', [ManageMentController::class, 'detail'])->name('management.detail');
+    Route::post('/save', [ManageMentController::class, 'save'])->name('management.save');
     Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
     Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

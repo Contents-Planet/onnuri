@@ -9,14 +9,16 @@
         <a href="javascript:void(0);" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
       </div>
     </div>
+    {{-- {{dd($store_data);}} --}}
     <div class="panel-body">
-      <form role="form" method="POST" name="frm" enctype="multipart/form-data">
+      <form role="form" method="POST" id="frm" action="{{ route("management.save") }}">
         @csrf
+        <input type='hidden' name='seq' value='{{$store_data['seq']}}'>
         <div class="row">
           <dl class="form-dl col-md-6">
             <dt><label class="form-label col-form-label req" for="content">상점명</label></dt>
             <dd>
-              <input class="form-control" type="text" name="s_date" id="s_date" value="{{$store_data['industry_name'] ?? null }}" placeholder=""/>
+              <input class="form-control" type="text" name="franchise_name" id="franchise_name" value="{{$store_data['franchise_name'] ?? null }}" placeholder=""/>
             </dd>
           </dl>
         </div>
@@ -57,9 +59,21 @@
               <input class="form-control" type="text" name="addres_depth_detail" id="addres_depth_detail" value="{{$store_data['addres_depth_detail'] ?? null}}" placeholder=""/>
             </dd>
           </dl>
+          <dl class="form-dl col-md-6">
+            <dt><label class="form-label col-form-label" for="content">위도</label></dt>
+            <dd>
+              <input class="form-control" type="text" name="latitude" id="latitude" value="{{$store_data['latitude'] ?? null}}" placeholder=""/>
+            </dd>
+          </dl>
+          <dl class="form-dl col-md-6">
+            <dt><label class="form-label col-form-label" for="content">경도</label></dt>
+            <dd>
+              <input class="form-control" type="text" name="longitude" id="longitude" value="{{$store_data['longitude'] ?? null}}" placeholder=""/>
+            </dd>
+          </dl>
         </div>
         <ul class="btn-right">
-          <li><a href="javascript:void(0)" class="btn btn-primary btn-sm" data-action="save">Save</a></li>
+          <li><a href="javascript:void(0)" class="btn btn-primary btn-sm saveBtn" data-action="save">Save</a></li>
         </ul>
       </form>
     </div>
@@ -67,6 +81,12 @@
 @endsection
 @push('js')
 <script>
+    $(".saveBtn").on("click",function (){
+
+      $("#frm").submit();
+
+    });
+
   $("#addres_depth_1").on("change",function(){
     $.ajax({
       headers: {

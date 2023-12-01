@@ -104,7 +104,7 @@
               <td style='text-align:center;'><p class="dec">{{$list->addres ." ". $list->addres_depth_detail}}</p></td>
               <td style='text-align:center;'>{{$list->latitude}} <br> {{$list->longitude}}</td>
               <td style='text-align:center;'>
-                <button class="btn btn-gray" href="{{ route('management.detail',['seq' => $list->seq]) }}">수정</button>
+                <button class="btn btn-gray storeModify" data-seq={{$list->seq}}>수정</button>
                 <button class="btn btn-danger">삭제</button>
               </td>
             </tr>
@@ -130,6 +130,11 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
   <script>
+
+    $(".storeModify").on("click",function (){
+      var seq = $(this).data('seq');
+      location.href="/management/detail/"+seq;
+    });
     function excelDown(){
       $.ajax({
         headers: {

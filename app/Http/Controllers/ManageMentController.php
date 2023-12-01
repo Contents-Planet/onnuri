@@ -78,9 +78,31 @@ class ManageMentController extends OnnuriController
     return $html;
   }
 
+  public function save(Request $request)
+  {
+    $depth1 = explode(' ', $request->addres)[0];
+
+    $data = [
+      "franchise_name" => $request->franchise_name,
+      "addres_code" => $request->addres_depth_1,
+      "addres_depth_1" => $depth1,
+      "addres_depth_2" => $request->addres_depth_2,
+      "addres" => $request->addres,
+      "addres_depth_detail" => $request->addres_depth_detail,
+      "latitude" => $request->latitude,
+      "longitude" => $request->longitude,
+    ];
+
+
+    Store::find($request->seq)->update($data);
+
+    return redirect()->route('management.mian');
+  }
+
+
   public function detail(Request $request)
   {
-    $store_data = Store::find($request->seq)->first();
+    $store_data = Store::find($request->seq);
     $depth2City = 'city_name.depth2.' . $store_data['addres_code'] . '' ?? null;
 
     $data = [
