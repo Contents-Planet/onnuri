@@ -40,6 +40,8 @@ class ExportStore implements FromCollection
                                 "addres_depth_1",
                                 "addres_depth_2",
                                 "emoji_code",
+                                "latitude",
+                                "longitude",
                               )->whereNotNull('business_number');
 
     if (!empty($this->request["search_depth_1"])) {
@@ -54,9 +56,8 @@ class ExportStore implements FromCollection
       $store_data->where($this->request["search_type"],"LIKE",'%'.$this->request["search_keyword"].'%');
     }
 
-    if (!empty($this->request->input("search_latLng"))) {
-
-      if ($this->request->input("search_latLng") == "Y") {
+    if (!empty($this->request["search_latLng"])) {
+      if ($this->request["search_latLng"] == "Y") {
         $store_data->where("latitude","!=","null");
       }else{
         $store_data->where("latitude","null");
@@ -81,7 +82,9 @@ class ExportStore implements FromCollection
       "(BC가맹점)동이하주소",
       "시 / 도",
       "구 / 군",
-      "emoji_code"
+      "emoji_code",
+      "위도",
+      "경도",
     ];
   }
 

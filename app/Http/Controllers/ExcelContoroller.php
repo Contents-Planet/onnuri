@@ -71,15 +71,15 @@ class ExcelContoroller extends Controller
 
   public function dataToExcel(Request $request)
   {
-    ini_set('memory_limit','500M');
+    ini_set('memory_limit','2000M');
     ini_set('upload_max_filesize', '30M');
 
     $requestArray =[
-      'search_depth_1' => $request->input('search_depth_1'),
-      'search_depth_2' => $request->input('search_depth_2'),
-      'search_type' => $request->input("search_type"),
-      'search_keyword' => $request->input('search_keyword'),
-      'search_latLng' => $request->input('search_latLng'),
+      'search_depth_1' => $request->input('search_depth_1') ?? null,
+      'search_depth_2' => $request->input('search_depth_2') ?? null,
+      'search_type' => $request->input("search_type") ?? null,
+      'search_keyword' => $request->input('search_keyword') ?? null,
+      'search_latLng' => $request->input('search_latLng') ?? null,
     ];
 
     $xlsxTitle = "onnuri_".date("ymdHis");

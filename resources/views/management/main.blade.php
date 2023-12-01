@@ -135,6 +135,7 @@
       var seq = $(this).data('seq');
       location.href="/management/detail/"+seq;
     });
+
     function excelDown(){
       $.ajax({
         headers: {
@@ -146,13 +147,13 @@
           'search_depth_1' : $("#search_depth_1").val(),
           'search_depth_2' : $("#search_depth_2").val(),
           'search_type' : $("#search_type").val(),
-          'search_keyword' : $("#search_keyword").val(),
-          'search_latLng' : $("#search_latLng").val(),
+          'search_keyword' : $("#search_keyword").val()
         },
         xhrFields: {
             responseType: 'blob'
         },
         success: function(response) {
+
           var blob = new Blob([response]);
           var link = document.createElement('a');
           link.href = window.URL.createObjectURL(blob);

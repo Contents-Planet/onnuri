@@ -107,7 +107,9 @@ class StoreController extends OnnuriController
   }
 
   public function testAddres(Request $request){
-    $stores = Store::whereNotNull('business_number')->offset(37000)->limit(1000)->orderBy('seq','asc');
+    $stores = Store::whereNotNull('business_number')->where("latitude","null")
+    ->offset(0)->limit(1000)->orderBy('seq','asc');
+
     $data = [];
 
     foreach ($stores->get() as $list) {
