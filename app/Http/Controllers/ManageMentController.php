@@ -46,7 +46,7 @@ class ManageMentController extends OnnuriController
     }
 
     $store_data->limit($limitPage)->orderBy('seq', 'desc');
-    $this->getQuery($store_data);
+    // $this->getQuery($store_data);
     $depth2City = 'city_name.depth2.' . $request->input("search_depth_1") . '' ?? null;
 
     $data = [
