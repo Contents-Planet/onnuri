@@ -198,40 +198,5 @@
       }
       $("#excelForm").submit();
     }
-
-    // function testAddres(){
-    //   var geocoder = new kakao.maps.services.Geocoder();
-    //   $.ajax({
-    //     headers: {
-    //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     },
-    //     type: 'get',
-    //     dataType: 'json',
-    //     url: "{{ route('store.testAddres') }}",
-    //     data: {
-    //     },
-    //     success: function(res) {
-
-    //       $.each(res.data, function(index, row) {
-    //         var jsonObj = new Object();
-    //         var add,lat,lng;
-    //           add = row.add;
-    //           geocoder.addressSearch(row.add, function (result, status) {
-    //             // console.log(status);
-    //             if(status == "OK"){
-    //               $('.testAddres > tbody:last').append('<tr><td>'+row.seq+'</td><td>'+row.business_number+'</td><td>'+row.franchise_name+'</td><td>'+row.franchise_number+'</td><td>'+row.industry_code+'</td><td>'+row.industry_name+'</td><td>'+row.market_code+'</td><td>'+row.market_name+'</td><td>'+row.addres_code+'</td><td>'+row.addres+'</td><td>'+row.addres_depth_detail+'</td><td>'+row.emoji_code+'</td><td>'+row.addres_depth_1+'</td><td>'+row.addres_depth_2+'</td><td>'+result[0].x+'</td><td>'+result[0].y+'</td></tr>');
-    //             }else{
-    //               $('.testAddres > tbody:last').append('<tr><td>'+row.seq+'</td><td>'+row.business_number+'</td><td>'+row.franchise_name+'</td><td>'+row.franchise_number+'</td><td>'+row.industry_code+'</td><td>'+row.industry_name+'</td><td>'+row.market_code+'</td><td>'+row.market_name+'</td><td>'+row.addres_code+'</td><td>'+row.addres+'</td><td>'+row.addres_depth_detail+'</td><td>'+row.emoji_code+'</td><td>'+row.addres_depth_1+'</td><td>'+row.addres_depth_2+'</td><td>null</td><td>null</td></tr>');
-    //             }
-
-    //           });
-
-
-    //       })
-    //     }
-    //   });
-    // }
-
-    // testAddres();
   </script>
 @endpush
