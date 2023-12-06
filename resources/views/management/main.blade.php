@@ -115,14 +115,14 @@
     </div>
   </div>
 
-  {{-- <div>
+  {{--
+  <div>
     <table class='testAddres'>
       <tbody>
-
       </tbody>
     </table>
-
-  </div> --}}
+  </div>
+  --}}
 
 @endsection
 @push('js')
