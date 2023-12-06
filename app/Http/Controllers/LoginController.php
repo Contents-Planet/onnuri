@@ -34,7 +34,7 @@ class LoginController extends Controller
             $request->session()->put('member_name',$userInfo->name);
             Member::find($userInfo->seq)->update(['latest_date' => date("Y-m-d H:i:s")]);
             auth()->login($userInfo);
-            return Redirect::to(env('ADMIN_DOMAIM').'/management');
+            return redirect()->route('management.mian');
         }
 
         return back()->withErrors([
@@ -47,7 +47,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return Redirect::to(env('ADMIN_DOMAIM').'/login');
+        return redirect()->route('logout');
     }
 
 }
