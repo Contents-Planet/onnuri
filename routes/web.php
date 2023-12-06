@@ -17,34 +17,18 @@ use App\Http\Controllers\ExcelContoroller;
 |
 */
 
-Route::get('/', function () {
-  return view('main');
-});
-
-Route::prefix('/store')->group(function () {
-  Route::get('/list', [StoreController::class, 'list'])->name('store.list');
-  Route::get('/', [StoreController::class, 'index'])->name('store');
-  Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
-  Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
-  Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
-  Route::get('/testAddres', [StoreController::class, 'testAddres'])->name('store.testAddres');;
-});
-
-Route::post('/excelUpload', [ExcelContoroller::class, 'excelToData'])->middleware('auth')->name('excel.upload');
-Route::post('/excelDownload', [ExcelContoroller::class, 'dataToExcel'])->middleware('auth')->name('excel.download');
-
-
-Route::domain('admin.onnuri-event.co.kr')->group(function () {
-  Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
-  Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
-  Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-  Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-  Route::prefix('/management')->group(function () {
-    Route::group(['middleware' => 'auth'], function () {
-      Route::get('/detail/{seq?}', [ManageMentController::class, 'detail'])->name('management.detail');
-      Route::post('/save', [ManageMentController::class, 'save'])->name('management.save');
-      Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');
-    });
+Route::domain(env('APP_URL'))->group(function () {
+  Route::get('/', function () {
+    return view('main');
   });
-})->middleware('auth');
+
+  Route::prefix('/store')->group(function () {
+    Route::get('/list', [StoreController::class, 'list'])->name('store.list');
+    Route::get('/', [StoreController::class, 'index'])->name('store');
+    Route::get('/getCityNames', [StoreController::class, 'getCityNames'])->name('store.city');
+    Route::get('/findStore', [StoreController::class, 'findStore'])->name('store.find');
+    Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
+  });
+
+});
+
