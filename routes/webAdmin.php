@@ -17,7 +17,7 @@ use App\Http\Controllers\ExcelContoroller;
 |
 */
 
-Route::domain(env('ADMIN_DOMAIN'))->group(function () {
+
   Route::get('/', [ManageMentController::class, 'index'])->name('management.mian');
   Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
   Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
@@ -33,4 +33,4 @@ Route::domain(env('ADMIN_DOMAIN'))->group(function () {
       Route::post('/', [ManageMentController::class, 'searchSecondDepth'])->name('store.search_depth2');
     });
   });
-})->middleware('auth');
+
