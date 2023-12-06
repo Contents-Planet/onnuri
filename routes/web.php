@@ -17,7 +17,7 @@ use App\Http\Controllers\ExcelContoroller;
 |
 */
 
-Route::domain(env('APP_URL'))->group(function () {
+
   Route::get('/', function () {
     return view('main');
   });
@@ -30,5 +30,4 @@ Route::domain(env('APP_URL'))->group(function () {
     Route::get('/getStoreList', [StoreController::class, 'getStoreList']);
   });
 
-});
 
