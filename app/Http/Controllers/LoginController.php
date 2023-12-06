@@ -6,6 +6,8 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+
 class LoginController extends Controller
 {
     /**
@@ -32,7 +34,7 @@ class LoginController extends Controller
             $request->session()->put('member_name',$userInfo->name);
             Member::find($userInfo->seq)->update(['latest_date' => date("Y-m-d H:i:s")]);
             auth()->login($userInfo);
-            return redirect('/management');
+            return Redirect::to(env('ADMIN_DOMAIM').'/management');
         }
 
         return back()->withErrors([
@@ -45,7 +47,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/management/login');
+        return Redirect::to(env('ADMIN_DOMAIM').'/login');
     }
 
 }
