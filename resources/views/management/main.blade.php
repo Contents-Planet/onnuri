@@ -64,7 +64,7 @@
         <hr>
         <ul class="btn-right">
           <li><a href="javascript:void(0)" class="btn btn-gray" onclick="document.getElementById('search_form').submit();">검색</a></li>
-          <li><a href="/management" class="btn btn-danger">초기화</a></li>
+          <li><a href="/" class="btn btn-danger">초기화</a></li>
           <li><a class="btn btn-success" style='background-color:#008C8C; color:#fff;' onclick="excelDown();"><i class="fas fa-file-excel" aria-hidden="true"></i> Excel Download</a></li>
         </ul>
       </form>
