@@ -30,12 +30,10 @@ class RouteServiceProvider extends ServiceProvider
 
     $this->routes(function () {
 
-
-
       Route::middleware('web')
         ->group(base_path('routes/web.php'));
 
-      Route::domain(env('ADMIN_DOMAIN'))
+      Route::domain('admin.onnuri-event.co.kr')
         ->group(base_path('routes/webAdmin.php'));
 
       Route::domain(env('API_DOMAIN'))
