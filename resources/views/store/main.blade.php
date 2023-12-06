@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div id="wrap" class="page-store">
+  <div class="loader loader-7"></div>
+  <div id="wrap" class="page-store">
   <header id="header">
     <div class="sticky"><h1 id="logo"><a href="" class="logo-item"></a></h1></div>
     <p class="h1"><strong class="t-orange">온누리 가맹점</strong>을 <br />소개합니다</p>

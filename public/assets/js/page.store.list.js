@@ -327,7 +327,6 @@ var Map = {
           clickable : true,
           image: markerImage,
         });
-        marker.id = position.seq
 
         /*customoverlay Todo*/
         var content = '<div class="customoverlay">';

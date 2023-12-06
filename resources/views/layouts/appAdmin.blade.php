@@ -23,12 +23,14 @@
   <link rel="stylesheet" href="https://static.econtents.co.kr/_asset/_lib/color_admin/dropzone/dist/min/dropzone.min.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/vendor.min.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/default/app.min.css" type="text/css"/>
-  <link rel="stylesheet" href="/assets/css/admin/common.css" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/admin/common.min.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/admin/style.css" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/jquery.datetimepicker.min.css" type="text/css"/>
   <script src="https://static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
   <script src="/assets/js/ND.function.js"></script>
   <script src="/assets/js/plugins/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+  <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script><!-- 다음 5자리 새 우편번호 api -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=45b3ea22ee1b2c199d03c9d267c85487&libraries=services,clusterer,drawing"></script>
 </head>
 
 <body class="pace-top theme-green {{ $class ?? '' }}">
