@@ -30,18 +30,18 @@ class RouteServiceProvider extends ServiceProvider
 
     $this->routes(function () {
 
+
+
+      Route::middleware('web')
+        ->group(base_path('routes/web.php'));
+
       Route::domain(env('ADMIN_DOMAIN'))
-        ->middleware('auth')
-        ->namespace($this->namespace)
         ->group(base_path('routes/webAdmin.php'));
 
       Route::domain(env('API_DOMAIN'))
         ->middleware('api')
         ->namespace($this->namespace)
         ->group(base_path('routes/api.php'));
-
-      Route::middleware('web')
-        ->group(base_path('routes/web.php'));
     });
   }
 }
