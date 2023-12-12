@@ -98,6 +98,7 @@
   $(function(){
     Address.Init();
     Page.Init();
+
   })
 
   var geocoder = new kakao.maps.services.Geocoder(),
@@ -122,25 +123,20 @@
     SearchCordsFromAdd : function() {
       var add1 = $("[name=addres]").val(),
         add2 = $("[name=addres_depth_detail]").val(),
-        $latitude = $("[name=latitude]"),
-        $longitude = $("[name=longitude]");
+        latitude = $("[name=latitude]"),
+        longitude = $("[name=longitude]");
 
       if(add1){
         geocoder.addressSearch((add1 +' '+ (add2 ? add2 : '')), function(result, status) {
           if (status === kakao.maps.services.Status.OK) {
-            $latitude.val(result[0].x);
-            $longitude.val(result[0].y);
+            latitude.val(result[0].x);
+            longitude.val(result[0].y);
           }
         })
       }
     },
 
     Bind : function(){
-      $(".saveBtn").on("click",function (){
-        Page.SearchCordsFromAdd();
-        $("#frm").submit();
-      });
-
       $("#addres_depth_1").on("change",function(){
         Page.ChangeCity();
       });
@@ -148,6 +144,12 @@
 
     Init : function(){
       Page.SearchCordsFromAdd();
+
+      $(".saveBtn").on("click",function (){
+        console.log('asd');
+        Page.SearchCordsFromAdd();
+        $("#frm").submit();
+      });
     }
   }
 
