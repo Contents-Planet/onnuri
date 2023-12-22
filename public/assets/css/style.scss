@@ -1,0 +1,1011 @@
+@charset "utf-8";
+
+#wrap {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  word-break: keep-all
+}
+
+figure {
+  display: block;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.sec2 {
+  background: url(https://static.econtents.co.kr/_img/onnuri/bg.webp) top center repeat-y;
+  background-size: cover;
+}
+
+.m-main {
+  width: 100%;
+  padding: 0 15px;
+}
+
+#sticky-line {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 0;
+  top: 0;
+  border: 0;
+}
+
+#contents {
+  position: relative
+}
+
+.btn {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 0;
+  padding: 30px 0;
+  background: #fe5521 !important;
+  border: 0;
+  height: auto;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-shadow: -2px 0 2px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &._sticky {
+    position: absolute;
+    bottom: -104px;
+  }
+
+  img {
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+#footer {
+  font-size: 24px;
+  font-family: 'NotoSans';
+  padding-top: 134px;
+
+  .m-main {
+    max-width: 1000px;
+    padding: 0;
+  }
+
+  .tit {
+    font-size: 30px;
+    padding-left: 0;
+    font-family: 'HGGGothicssi';
+  }
+
+  .tit:before {
+    display: none;
+  }
+
+  .row-ul {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .btn {
+    padding: 15px 0;
+
+    &._sticky {
+      bottom: -74px;
+    }
+
+    img {
+      max-width: 300px;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+
+  #footer {
+    font-size: 20px;
+    padding-top: 104px;
+
+    .tit {
+      font-size: 26px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .btn {
+    &._sticky {
+      bottom: -59px;
+    }
+
+    img {
+      max-width: 200px;
+    }
+  }
+
+  #footer {
+    font-size: 16px;
+    padding-top: 89px;
+
+    .tit {
+      font-size: 20px;
+    }
+
+    .row-ul {
+      padding-left: 15px;
+    }
+  }
+}
+
+/*page-store*/
+.h1 {
+  font-size: 25px;
+}
+
+.t-orange {
+  color: #FE5521
+}
+
+.drop-container {
+  .drop-wrap {
+    display: none;
+  }
+
+  &._open > .drop-wrap {
+    display: block;
+  }
+}
+
+.label-flex {
+  margin: 0 -5px;
+  margin-top: 25px;
+  align-items: stretch;
+
+  & > li {
+    width: 33.33%;
+    padding: 0 5px;
+    margin-bottom: 10px;
+  }
+
+  &.icon > li {
+    width: 25%;
+
+    &.hide,
+    &._hide {
+      display: none;
+    }
+
+    &.hide._active {
+      display: block;
+    }
+
+    &.w100 {
+      width: 100%;
+    }
+  }
+}
+
+.label-wrap {
+  display: block;
+  position: relative;
+  width: 100%;
+  font-size: 16px;
+
+  [type=radio],
+  [type=checkbox] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &.type-btn .txt {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 40px;
+    text-align: center;
+    border: 1px solid #E9E9E9;
+    background: #FCFCFC;
+    color: #4B4B4B;
+  }
+
+  &.type-btn {
+    .txt small {
+      font-size: 32px;
+      font-weight: 100;
+    }
+
+    :checked + .txt {
+      background: #FE5521;
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+
+  &.type-icon {
+    .txt {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      padding-top: 70px;
+      background-size: 50px auto;
+      background-position: center top 8px;
+      position: relative;
+      background-repeat: no-repeat;
+    }
+
+    :checked + .txt {
+      font-weight: 700;
+
+      &::after {
+        content: "";
+        display: block;
+        width: 20px;
+        height: 20px;
+        background: url(https://static.econtents.co.kr/_img/onnuri/ico_chk.webp) center no-repeat;
+        background-size: cover;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+  &._disable {
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.btn-drop {
+  &.search {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 40px;
+    text-align: center;
+    border: none !important;
+    background: #FE5521 !important;
+    color: #fff !important;
+    font-size: 50px;
+
+    &::before {
+      display: none !important;
+    }
+  }
+}
+
+.label-flex {
+  & > li {
+    &.all {
+      width: 100% !important;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px 0;
+
+      .label-wrap {
+        display: inline-block;
+        width: auto;
+
+        .txt {
+          position: relative;
+          white-space: nowrap;
+          padding-left: 30px;
+          color: #5E5E5E;
+          font-size: 16px;
+
+          &::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url(https://static.econtents.co.kr/_img/onnuri/ico_chk2.webp) center no-repeat;
+            background-size: cover;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            z-index: 1;
+          }
+        }
+
+        :checked + .txt {
+          color: #FE5521;
+          font-weight: 500;
+
+          &::before {
+            background-image: url(https://static.econtents.co.kr/_img/onnuri/ico_chk.webp)
+          }
+        }
+
+        &._disable {
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.btn-close {
+  display: block;
+  width: 100%;
+  padding: 15px 10px;
+  border-radius: 8px;
+  background: #F2F2F2;
+  text-align: center;
+
+  .txt {
+    text-align: center;
+    background-size: 50px auto;
+    background-position: center top 8px;
+    position: relative;
+    background-repeat: no-repeat;
+    padding: 0;
+    padding-right: 30px;
+    display: inline-block;
+    width: auto;
+    font-size: 14px;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 14px;
+      height: 8px;
+      background: url(https://static.econtents.co.kr/_img/onnuri/drop_arrow.webp) center no-repeat;
+      background-size: cover;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      transition-duration: .3s
+    }
+  }
+
+  &.more {
+    .txt {
+      &::before {
+        transform: translate(0, -50%) rotate(180deg);
+      }
+    }
+  }
+}
+
+.btn-more {
+  position: relative;
+
+  .txt {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    padding-top: 70px;
+    background-size: 50px auto;
+    background-position: center top 8px;
+    position: relative;
+    background-repeat: no-repeat;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 38px;
+      height: 38px;
+      background-size: 13px auto;
+      border-radius: 6px;
+      background: #F2F2F2 url(https://static.econtents.co.kr/_img/onnuri/drop_arrow.webp) center no-repeat;
+      background-size: 13px auto;
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      transform: translate(-50%, 0) rotate(180deg);
+      transition-duration: .3s
+    }
+  }
+}
+
+.dott {
+  display: block;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.page-store {
+  &#wrap {
+    font-family: 'Pretendard';
+    position: relative;
+    padding-top: 66px;
+    color: #222; /*background:url(https://static.econtents.co.kr/_img/onnuri/bg_splash.webp) center top 200px no-repeat;*/
+    background-size: 100% auto;
+    min-width: 320px;
+    max-width: 768px;
+    margin: 0 auto;
+    width: 100%;
+
+    &._search {
+      padding-top: 0;
+
+      #contents {
+        padding-bottom: 0;
+      }
+
+      .drop-sec {
+        display: none;
+      }
+
+      .selected-container {
+        display: block;
+      }
+
+      .data-container {
+        display: block;
+      }
+    }
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 66px;
+    background: url(https://static.econtents.co.kr/_img/onnuri/bg_top.webp) center top repeat-x;
+    background-size: auto 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0)
+  }
+
+  #header {
+    text-align: center;
+    z-index: 10;
+    font-family: 'HGGGothicssi';
+    padding-top: 56px;
+    position: relative;
+
+    .sticky {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      padding: 15px 0;
+    }
+
+    #logo {
+      width: 100%;
+      max-width: 60px;
+      margin: 0 auto;
+
+      .logo-item {
+        display: block;
+        width: 100%;
+        padding-top: 44.15%;
+        background: url(https://static.econtents.co.kr/_img/onnuri/logo.webp) center no-repeat;
+        background-size: cover;
+      }
+    }
+
+    .h1 {
+      font-weight: 700;
+      display: inline-block;
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 100%;
+        border: 2px solid #FE5521;
+        position: absolute;
+        left: -10px;
+        top: -10px;
+      }
+
+      strong {
+        font-weight: 900;
+      }
+    }
+  }
+
+  #contents {
+    padding-bottom: 50px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .m-main {
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .drop-sec {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 10px;
+    margin-top: 30px;
+  }
+
+  .drop-container {
+    margin-bottom: 20px;
+
+    .btn-drop {
+      display: block;
+      padding: 20px 25px;
+      border-radius: 65px;
+      font-size: 20px;
+      background: #fff;
+      box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        display: block;
+        width: 13px;
+        height: 8px;
+        background-image: url(https://static.econtents.co.kr/_img/onnuri/drop_arrow.webp);
+        background-positoin: center no-repeat;
+        background-repeat:no-repeat;
+        background-size: cover;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translate(0, -50%);
+        transition-duration: 0.3s;
+      }
+
+      .dt {
+        display: none;
+      }
+
+      small {
+        color: #666;
+        font-size: 18px;
+      }
+    }
+
+    &._disable {
+      .btn-drop {
+        box-shadow: none;
+        background: #ccc;
+        cursor: not-allowed;
+
+        &:hover,
+        &:focus {
+          outline: 0;
+        }
+
+        &::after {
+          content: "";
+          display: block;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.8);
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+
+    &._checked {
+      .btn-drop {
+        &::before {
+          display: none;
+        }
+
+        dl {
+          display: flex;
+          justify-content: space-between;
+          color: #222;
+          font-size: 16px;
+        }
+
+        .label {
+          display: none;
+        }
+
+        .dt {
+          display: block;
+          color: #BEBEBE;
+        }
+      }
+    }
+
+    &._open {
+      .btn-drop {
+        &::before {
+          transform: translate(0, -50%) rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .map-container {
+    height: 400px;
+    width: 100%;
+
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .list-flex {
+    font-size: 14px;
+    height: calc(100% - 470px);
+    overflow: hidden;
+    overflow-y: auto;
+    margin-top: 10px;
+    align-items: flex-start;
+    width: 100%;
+
+    & > li {
+      border-bottom: 1px solid #E9E9E9;
+      padding: 15px 5px;
+      width: 100%;
+
+      &._active {
+        background: rgba(135, 206, 235, 0.4)
+      }
+
+      &.non-bd {
+        border: 0;
+      }
+    }
+  }
+
+  .data-flex {
+    & > dt {
+      width: calc(100% - 70px);
+      padding-right: 8px;
+      position: relative;
+      flex-wrap: nowrap
+    }
+
+    & > dd {
+      width: 70px;
+    }
+
+    .col-ico {
+      width: 45px;
+
+      .ico {
+        display: block;
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 100%;
+        background-color: #FAFAFA;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 33px auto;
+      }
+    }
+
+    .col-dec {
+      padding-left: 0;
+    }
+
+    .tit {
+      font-size: 16px;
+      font-weight: 500;
+      display: block;
+      width: 100%;
+    }
+
+    .latlng {
+      display: none;
+    }
+
+    .btn-flex {
+      margin: 0 -10px;
+      justify-content: flex-end;
+
+      & > li {
+        padding: 0 10px;
+        width: 50%;
+      }
+
+      .tel,
+      .map {
+        display: block;
+        border-radius: 100%;
+        width: 100%;
+        padding-top: 100%;
+      }
+
+      .tel {
+        border: 1px solid #E9E9E9;
+        background: #FAFAFA url(https://static.econtents.co.kr/_img/onnuri/ico_tel.webp) center no-repeat;
+        background-size: 17px auto;
+      }
+
+      .map {
+        border: 1px solid #364267;
+        background: #364267 url(https://static.econtents.co.kr/_img/onnuri/ico_map_v2.webp) center no-repeat;
+        background-size: 14px auto;
+      }
+    }
+  }
+
+  .btt-flex {
+    padding: 10px 0;
+    justify-content: center;
+    width: 100%;
+
+    & > li {
+      padding: 0 5px;
+      width: 40px;
+    }
+  }
+
+  .btn-share {
+    display: block;
+    width: 100%;
+    padding-top: 100%;
+    border: 0;
+    height: 0;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &.url {
+      background-image: url(https://static.econtents.co.kr/_img/onnuri/ico_share.webp)
+    }
+
+    &.kakao {
+      background-image: url(https://static.econtents.co.kr/_img/onnuri/ico_kakao.webp)
+    }
+  }
+}
+
+.selected-container {
+  display: none;
+  background: #fff;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  padding: 10px 15px;
+
+  .filter {
+    display: block;
+    border-radius: 65px;
+    font-size: 20px;
+    background: #fff;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    line-height: 1;
+    padding: 10px 0 !important;
+    padding-left: 50px !important;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      background-image: url('https://static.econtents.co.kr/_img/onnuri/ico_search.webp');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translate(0, -50%)
+    }
+
+    .tit {
+      font-size: 16px;
+    }
+
+    .dec {
+      font-size: 14px;
+      margin-top: 3px;
+      color: rgb(113, 113, 113)
+    }
+  }
+}
+
+.data-container {
+  display: none;
+  background: #fff;
+  width: 100%;
+  position: relative;
+  height: 100vh;
+  z-index: 10;
+  padding-top: 77px;
+  min-width: 320px;
+
+  .m-main {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.customoverlay {
+  position: relative;
+  bottom: 70px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  float: left;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 27px;
+    height: 12px;
+    background: url(https://static.econtents.co.kr/_img/onnuri/logo.webp) center no-repeat;
+    background-size: cover;
+    left: 5px;
+    right: auto;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  &:nth-of-type(n) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    background: #d95050;
+    background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.webp) no-repeat right 14px center;
+  }
+
+  .strore {
+    display: block;
+    text-align: center;
+    background: #fff;
+    padding: 7px 5px;
+    padding-left: 35px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 500px) {
+  .btn-drop {
+    &.search {
+      font-size: 20px;
+    }
+  }
+
+  .data-container {
+    padding-top: 87px;
+  }
+  .page-store {
+    .list-flex {
+      font-size: 14px;
+
+      & > li {
+        padding: 15px 0;
+      }
+    }
+    .data-flex {
+      & > dt {
+        width: calc(100% - 70px);
+        padding: 0 8px;
+      }
+
+      &  > dd {
+        width: 70px;
+      }
+
+      .col-ico {
+        width: 54px;
+
+        .ico {
+          background-size: 33px auto;
+        }
+      }
+
+      .col-dec {
+        width: calc(100% - 54px);
+        padding-left: 10px;
+      }
+
+      .tit {
+        font-size: 16px;
+      }
+
+      .btn-flex {
+        margin: 0 -4px;
+
+        & > li {
+          padding: 0 4px;
+        }
+
+        .tel {
+          background-size: 17px auto;
+        }
+
+        .map {
+          background-size: 14px auto;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .label-flex {
+    &.depth2 {
+      .txt {
+        padding: 8px 5px
+      }
+    }
+  }
+
+  .label-wrap {
+    &.type-btn {
+      .txt {
+        small {
+          font-size: 12px;
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
