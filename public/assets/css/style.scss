@@ -1003,8 +1003,143 @@ figure {
   }
 }
 
+/*page-how*/
+.page-how {
+  section {
+    position:relative;
+
+    .dott {
+      top:auto;
+      bottom:-100px;
+    }
+  }
+
+  .mall-flex {
+    padding:100px 0;
+    width:100%;
+    max-width:1110px;
+    margin:0 auto;
+
+    & > li {
+      padding:0 10px;
+      width:33.33%;
+      text-align:center;
+
+      .btn-item {
+        display:inline-block;;
+
+        img {
+          display:block;
+          transition-duration: .3s;
+        }
+
+        &:hover,
+        &:focus {
+          img {
+            display:block;
+            transform:scale(1.05);
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    display:block;
+    max-width: 300px;
+    padding: 0;
+    background: transparent !important;
+    border-radius: 100%;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    position:absolute;
+    bottom: -100px;
+    left: auto;
+    right:60px;
+    transform: translate(0, 0);
+    z-index: 10;
+    transition:opacity .3s;
+
+    &._sticky {
+      position: fixed;
+      left:50%;
+      right:auto;
+      bottom:20px;
+      margin-left: 540px;
+      opacity: .4;
+      transform: translate(-100%, 0);
+
+      &:hover,
+      &:active,
+      &:focus {
+        opacity:1;
+      }
+    }
+
+    &._hold {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    img {
+      width:100%;
+      display:block;
+    }
+  }
+
+  #footer {
+    padding-top:30px !important;
+    position:relative;
+    z-index:30;
+  }
+}
+
+@media (max-width: 1200px) {
+  .page-how {
+    section {
+      .dott {
+        bottom: -8.3vw;
+      }
+    }
+
+    .btn {
+      max-width: 25vw;
+      bottom: -8.3vw;
+      left:auto !important;
+      right:10px !important;
 
 
+      &._sticky {
+        bottom:1.67vw;
+        margin-left:0;
+        transform: translate(0, 0);
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .page-how {
+    .mall-flex {
+      padding:60px 0;
+
+      & > li {
+        padding:0 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .page-how {
+    .mall-flex {
+      padding:30px 0;
+
+      & > li {
+        padding:0 5px;
+      }
+    }
+  }
+}
 
 
 

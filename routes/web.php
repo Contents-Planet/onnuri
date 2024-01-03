@@ -10,6 +10,8 @@ use App\Http\Controllers\ExcelContoroller;
     return view('main');
   });
 
+  Route::get('/how', [StoreController::class, 'how']);
+
   Route::prefix('/store')->group(function () {
     Route::get('/list', [StoreController::class, 'list'])->name('store.list');
     Route::get('/', [StoreController::class, 'index'])->name('store');

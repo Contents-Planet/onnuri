@@ -25,6 +25,11 @@ class StoreController extends OnnuriController
     $data = [];
     return view('store.list')->with($data);
   }
+  public function how(Request $request)
+  {
+    $data = [];
+    return view('how.main')->with($data);
+  }
 
   public function getCityNames(Request $request)
   {
