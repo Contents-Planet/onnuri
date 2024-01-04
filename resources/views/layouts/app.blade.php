@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
   <meta charset="UTF-8">
   <title>온누리상품권</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +22,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="https://static.econtents.co.kr/_img/onnuri/favicon_v2.png"/>
 
   <!-- CSS Files -->
-  <link rel="stylesheet" href="/assets/css/common.css?v=20230921" type="text/css"/>
+  <link rel="stylesheet" href="/assets/css/common.min.css?v=20230921" type="text/css"/>
   <link rel="stylesheet" href="/assets/css/style.min.css?v=20230921" type="text/css"/>
 
   <script src="//static.econtents.co.kr/_asset/_lib/jquery-3.2.1.min.js"></script>
