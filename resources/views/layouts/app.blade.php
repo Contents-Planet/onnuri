@@ -16,6 +16,7 @@
 
   <meta property="og:type" content="article"/>
   <meta property="og:image" content="https://static.econtents.co.kr/_img/onnuri/og_img.jpg">
+  <meta property="og:image" content="https://static.econtents.co.kr/_img/onnuri/og_img.web">
   <meta property="og:image:width" content="600">
   <meta property="og:image:height" content="315">
 
