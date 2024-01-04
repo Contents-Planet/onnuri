@@ -15,8 +15,12 @@
   <meta property="og:type" content="article"/>
 
   <meta property="og:type" content="article"/>
-  <meta property="og:image" content="https://static.econtents.co.kr/_img/onnuri/og_img.jpg">
+
+  @if (Request::path() == "how")
   <meta property="og:image" content="https://static.econtents.co.kr/_img/onnuri/og_img.web">
+  @else
+  <meta property="og:image" content="https://static.econtents.co.kr/_img/onnuri/og_img.jpg">
+  @endif
   <meta property="og:image:width" content="600">
   <meta property="og:image:height" content="315">
 
