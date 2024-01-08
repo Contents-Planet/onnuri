@@ -13,7 +13,7 @@
           </figcaption>
         </figure>
 
-        <a href="" target="_blank" title="새창열림" class="btn" data-selector="floating">
+        <a href="#sec4" title="새창열림" class="btn" data-selector="floating">
           <img src="https://static.econtents.co.kr/_img/onnuri/float_link.webp" alt="온라인몰 바로가기"/>
         </a>
         <div class="dott" data-selector="secBase"></div>
@@ -42,7 +42,8 @@
           </figcaption>
         </figure>
       </section>
-      <section class="sec4">
+      <a name="sec4"></a>
+      <section class="sec4" >
         <figure>
           <img src="https://static.econtents.co.kr/_img/onnuri/how4.webp" alt=""/>
           <figcaption class="a11y">온라인몰 GO! GO!</figcaption>
@@ -61,6 +62,11 @@
           <li>
             <a href="https://www.onnuri-mall.co.kr/" class="btn-item" target="_blank">
               <img src="https://static.econtents.co.kr/_img/onnuri/mall_3.webp" alt="온누리시장"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.onnuri-mall.co.kr/" class="btn-item" target="_blank">
+              <img src="https://static.econtents.co.kr/_img/onnuri/mall_5.webp" alt="온누리굿데이"/>
             </a>
           </li>
         </ul>
